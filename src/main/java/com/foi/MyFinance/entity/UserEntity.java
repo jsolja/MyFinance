@@ -4,13 +4,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class UserEntity
+public class UserEntity implements UserDetails
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +47,7 @@ public class UserEntity
     @Column(name = "balance")
     private double balance;
 
-    @ColumnDefault("0")
+    @ColumnDefault("1")
     @Column(name = "active")
     private boolean active;
 
@@ -55,6 +61,11 @@ public class UserEntity
     @JsonIgnore
     private RoleEntity role;
 
+    public UserEntity()
+    {
+
+    }
+
     public UserEntity(final UserEntity user)
     {
         this.active = user.isActive();
@@ -66,6 +77,57 @@ public class UserEntity
         this.id = user.getId();
         this.password = user.getPassword();
         this.balance = user.getBalance();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities()
+    {
+        final List<GrantedAuthority> list = new ArrayList<>();
+
+        list.add(new SimpleGrantedAuthority(this.getRole().getRoleDescription()));
+
+        return list;
+    }
+
+    @Override
+    public String getPassword()
+    {
+        return this.password;
+    }
+
+    public void setPassword(final String password)
+    {
+        this.password = password;
+    }
+
+    @Override
+    public String getUsername()
+    {
+        return this.username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled()
+    {
+        return this.active;
     }
 
     public double getBalance()
@@ -96,21 +158,6 @@ public class UserEntity
     public void setEmail(final String email)
     {
         this.email = email;
-    }
-
-    public String getPassword()
-    {
-        return this.password;
-    }
-
-    public void setPassword(final String password)
-    {
-        this.password = password;
-    }
-
-    public String getUsername()
-    {
-        return this.username;
     }
 
     public void setUsername(final String username)
