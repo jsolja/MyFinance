@@ -10,16 +10,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableWebSecurity
 @Configuration
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter implements WebMvcConfigurer
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 {
-    private static final String LOGIN_PAGE = "/login";
-    private static final String HOME_PAGE = "/home";
-    private static final String LOGOUT_PAGE = "/logout";
-    private static final String LOGOUT_SUCCESS_PAGE = "/login?logout";
+    private static final String URL_LOGIN = "/login";
+    private static final String URL_USER_SECURITY = "/user/**";
+    private static final String URL_HOME = "/user/home";
+    private static final String URL_LOGOUT = "/logout";
+    private static final String URL_LOGOUT_SUCCESS = "/login?logout";
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -33,20 +33,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
     @Override
     protected void configure(final HttpSecurity http) throws Exception
     {
+        http.cors().and().csrf().disable();
         http//
             .authorizeRequests()//
-            .anyRequest()//
+            .antMatchers(URL_USER_SECURITY)//
             .authenticated()//
+            .anyRequest()//
+            .permitAll()//
             .and()//
             .formLogin()//
-            .loginPage(LOGIN_PAGE)//
-            .defaultSuccessUrl(HOME_PAGE)//
+            .loginPage(URL_LOGIN)//
+            .defaultSuccessUrl(URL_HOME)//
             .permitAll()//
             .and()//
             .logout()//
-            .logoutUrl(LOGOUT_PAGE)//
-            .logoutSuccessUrl(LOGOUT_SUCCESS_PAGE)//
-            .permitAll();
+            .logoutUrl(URL_LOGOUT)//
+            .logoutSuccessUrl(URL_LOGOUT_SUCCESS);
     }
 
     @Bean

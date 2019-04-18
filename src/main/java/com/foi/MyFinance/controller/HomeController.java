@@ -13,14 +13,15 @@ public class HomeController
 {
     private static final String MODEL_ATTRIBUTE_USER_ENTITY = "userEntity";
 
-    private static final String HOME_PAGE = "/home";
+    private static final String URL_HOME = "/user/home";
+    private static final String VIEW_HOME = "home";
 
-    @RequestMapping(value = HOME_PAGE, method = RequestMethod.GET)
+    @RequestMapping(value = URL_HOME, method = RequestMethod.GET)
     public String home(final Model model)
     {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         final UserEntity userEntity = (UserEntity) authentication.getPrincipal();
         model.addAttribute(MODEL_ATTRIBUTE_USER_ENTITY, userEntity);
-        return HOME_PAGE;
+        return VIEW_HOME;
     }
 }

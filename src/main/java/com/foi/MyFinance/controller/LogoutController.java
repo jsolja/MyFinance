@@ -16,10 +16,10 @@ public class LogoutController
 {
     private static final String REDIRECT = "redirect";
     private static final String COLON = ":";
-    private static final String LOGOUT_PAGE = "/logout";
-    private static final String LOGOUT_SUCCESS_PAGE = "/login?logout";
+    private static final String URL_LOGOUT = "/logout";
+    private static final String URL_LOGOUT_SUCCESS = "/login?logout";
 
-    @RequestMapping(value = LOGOUT_PAGE, method = RequestMethod.GET)
+    @RequestMapping(value = URL_LOGOUT, method = RequestMethod.GET)
     public String logout(final HttpServletRequest request, final HttpServletResponse response)
     {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -27,6 +27,6 @@ public class LogoutController
         {
             new SecurityContextLogoutHandler().logout(request, response, authentication);
         }
-        return REDIRECT + COLON + LOGOUT_SUCCESS_PAGE;
+        return REDIRECT + COLON + URL_LOGOUT_SUCCESS;
     }
 }
