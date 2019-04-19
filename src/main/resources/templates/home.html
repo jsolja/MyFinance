@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+Welcome, <span th:text="${userEntity.firstName}"/> <span th:text="${userEntity.lastName}"/>. This page can only be seen if you're logged in!
+<a href="/logout">Log out</a>
+</body>
+</html>
