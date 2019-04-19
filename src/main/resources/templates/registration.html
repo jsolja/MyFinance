@@ -8,12 +8,15 @@
 <form action="/registration" th:object="${userModel}" method="post">
     <input type="text" id="firstName" name="firstName" placeholder="First name" th:field="*{firstName}" required="required" minlength="3" maxlength="15"><br>
     <input type="text" id="lastName" name="lastName" placeholder="Last name" th:field="*{lastName}" required="required" minlength="3" maxlength="15"/><br>
-    <input type="email" id="email" name="email" placeholder="Email" th:field="*{email}" required="required" maxlength="30"/><br>
-    <input type="text" id="username" name="username" placeholder="Username" th:field="*{username}" required="required" minlength="3" maxlength="20"/><br>
+    <input type="email" id="email" name="email" placeholder="Email" th:field="*{email}" required="required" maxlength="30"/>
+    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br>
+    <input type="text" id="username" name="username" placeholder="Username" th:field="*{username}" required="required" minlength="3" maxlength="20"/>
+    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span><br>
     <input type="password" id="password" name="password" placeholder="Password" th:field="*{password}" required="required" minlength="3" maxlength="255"/><br>
     <input type="password" id="matchingPassword" name="matchingPassword" placeholder="Confirm password" th:field="*{matchingPassword}" required="required" minlength="3" maxlength="255"/>
     <span th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}"></span><br>
-    <input type="submit" id="submit" value="Sign up"/><br>
+    <input type="submit" id="submit" value="Sign up"/>
+    <span th:if="${successMessage}" th:text="${successMessage}"></span><br>
     Already registered? <a href="/login">Sign in</a>
 </form>
 </body>

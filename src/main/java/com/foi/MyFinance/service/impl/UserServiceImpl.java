@@ -39,6 +39,12 @@ public class UserServiceImpl
     }
 
     @Override
+    public Optional<UserEntity> findByEmail(final String email)
+    {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
     public UserEntity createUser(final UserModel userModel)
     {
         final UserEntity newUser = new UserEntity();

@@ -19,6 +19,8 @@ import javax.validation.Valid;
 public class RegistrationController
 {
     private static final String MODEL_ATTRIBUTE_USER_MODEL = "userModel";
+    private static final String MODEL_ATTRIBUTE_SUCCESS = "successMessage";
+    private static final String MODEL_ATTRIBUTE_SUCCESS_MESSAGE = "You have successfully registered!";
 
     private static final String URL_REGISTRATION = "/registration";
     private static final String VIEW_REGISTRATION = "registration";
@@ -46,9 +48,9 @@ public class RegistrationController
         ValidationUtils.invokeValidator(registrationFieldsValidator, userModel, result);
         if (!result.hasErrors())
         {
+            model.addAttribute(MODEL_ATTRIBUTE_SUCCESS, MODEL_ATTRIBUTE_SUCCESS_MESSAGE);
             userFacade.createUser(userModel);
         }
         return VIEW_REGISTRATION;
     }
-
 }
