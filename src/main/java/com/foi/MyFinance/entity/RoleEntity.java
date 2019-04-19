@@ -13,8 +13,8 @@ public class RoleEntity
     private int id;
 
     @NotNull
-    @Column(name = "role_description")
-    private String roleDescription;
+    @Column(name = "role")
+    private String role;
 
     public int getId()
     {
@@ -26,13 +26,13 @@ public class RoleEntity
         this.id = id;
     }
 
-    public String getRoleDescription()
+    public String getRole()
     {
-        return roleDescription;
+        return role;
     }
 
-    public void setRoleDescription(final String roleDescription)
+    public void setRole(final String role)
     {
-        this.roleDescription = roleDescription;
+        this.role = role;
     }
 }
