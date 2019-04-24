@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -22,7 +21,6 @@ public class RegistrationController
     private static final String MODEL_ATTRIBUTE_SUCCESS = "successMessage";
     private static final String MODEL_ATTRIBUTE_SUCCESS_MESSAGE = "You have successfully registered!";
 
-    private static final String URL_REGISTRATION = "/registration";
     private static final String VIEW_REGISTRATION = "registration";
 
     @Autowired
@@ -31,19 +29,18 @@ public class RegistrationController
     @Autowired
     private UserFacade userFacade;
 
-    @RequestMapping(value = URL_REGISTRATION, method = RequestMethod.GET)
-    public String getRegistration(final Model model)
+    @RequestMapping(value = VIEW_REGISTRATION, method = RequestMethod.GET)
+    public String getViewRegistration(final Model model)
     {
         model.addAttribute(MODEL_ATTRIBUTE_USER_MODEL, new UserModel());
         return VIEW_REGISTRATION;
     }
 
-    @RequestMapping(value = URL_REGISTRATION, method = RequestMethod.POST)
-    public String postRegistration(
+    @RequestMapping(value = VIEW_REGISTRATION, method = RequestMethod.POST)
+    public String postViewRegistration(
             @ModelAttribute(MODEL_ATTRIBUTE_USER_MODEL)
             @Valid
-            final UserModel userModel, final
-    HttpServletRequest request, final BindingResult result, final Model model)
+            final UserModel userModel, final BindingResult result, final Model model)
     {
         ValidationUtils.invokeValidator(registrationFieldsValidator, userModel, result);
         if (!result.hasErrors())
