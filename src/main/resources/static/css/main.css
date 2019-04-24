@@ -364,6 +364,7 @@ iframe {
 }
 
 .success-message {
+    padding-bottom: 10px;
     text-align: center;
     color: #57b846;
 }
