@@ -12,4 +12,6 @@ public interface UserFacade
     Optional<UserEntity> findByEmail(String email);
 
     Optional<UserEntity> findByUsername(String username);
+
+    Optional<UserEntity> findByResetToken(String token);
 }

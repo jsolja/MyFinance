@@ -32,4 +32,10 @@ public class UserFacadeImpl implements UserFacade
     {
         return userService.findByUsername(username);
     }
+
+    @Override
+    public Optional<UserEntity> findByResetToken(final String token)
+    {
+        return userService.findByResetToken(token);
+    }
 }

@@ -20,7 +20,7 @@ public class EmailServiceImpl implements EmailService
     private static final String QUESTION_MARK = "?";
     private static final String TOKEN = "token";
     private static final String EQUALS = "=";
-    private static final String URL_FORGOTTEN_PASSWORD = "/forgottenPassword";
+    private static final String URL_RESET_PASSWORD = "/resetPassword";
 
     @Value("${spring.mail.properties.from}")
     private String fromEmail;
@@ -43,13 +43,13 @@ public class EmailServiceImpl implements EmailService
             final UserEntity userEntity, final HttpServletRequest request)
     {
         userService.createResetToken(userEntity);
-        final String appUrl = request.getScheme() + SLASH + request.getServerName() + COLON + request
+        final String appUrl = request.getScheme() + COLON + SLASH + SLASH + request.getServerName() + COLON + request
                 .getServerPort() + request.getContextPath();
         final SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
         passwordResetEmail.setFrom(fromEmail);
         passwordResetEmail.setTo(userEntity.getEmail());
         passwordResetEmail.setSubject(emailPasswordResetSubject);
-        passwordResetEmail.setText(emailTextPasswordReset + appUrl + URL_FORGOTTEN_PASSWORD + QUESTION_MARK + TOKEN + EQUALS + userEntity
+        passwordResetEmail.setText(emailTextPasswordReset + appUrl + URL_RESET_PASSWORD + QUESTION_MARK + TOKEN + EQUALS + userEntity
                 .getResetToken());
         javaMailSender.send(passwordResetEmail);
     }

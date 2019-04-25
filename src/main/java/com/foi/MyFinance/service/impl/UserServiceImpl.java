@@ -46,6 +46,12 @@ public class UserServiceImpl
     }
 
     @Override
+    public Optional<UserEntity> findByResetToken(final String token)
+    {
+        return userRepository.findByResetToken(token);
+    }
+
+    @Override
     public void createResetToken(final UserEntity userEntity)
     {
         userEntity.setResetToken(UUID.randomUUID().toString());
