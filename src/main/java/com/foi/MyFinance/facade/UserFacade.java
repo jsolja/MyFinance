@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface UserFacade
 {
+    void resetUserPassword(UserEntity userEntity, String newPassword);
+
     UserEntity createUser(UserModel userModel);
 
     Optional<UserEntity> findByEmail(String email);

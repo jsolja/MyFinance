@@ -16,6 +16,12 @@ public class UserFacadeImpl implements UserFacade
     private UserService userService;
 
     @Override
+    public void resetUserPassword(final UserEntity userEntity, final String newPassword)
+    {
+        userService.resetUserPassword(userEntity, newPassword);
+    }
+
+    @Override
     public UserEntity createUser(final UserModel userModel)
     {
         return userService.createUser(userModel);

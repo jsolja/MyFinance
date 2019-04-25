@@ -20,7 +20,6 @@ public class RegistrationController
     private static final String MODEL_ATTRIBUTE_USER_MODEL = "userModel";
     private static final String MODEL_ATTRIBUTE_SUCCESS = "successMessage";
     private static final String MODEL_ATTRIBUTE_SUCCESS_MESSAGE = "You have successfully registered!";
-
     private static final String VIEW_REGISTRATION = "registration";
 
     @Autowired

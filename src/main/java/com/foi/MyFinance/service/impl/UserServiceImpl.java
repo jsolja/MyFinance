@@ -59,6 +59,14 @@ public class UserServiceImpl
     }
 
     @Override
+    public void resetUserPassword(final UserEntity userEntity, final String newPassword)
+    {
+        userEntity.setPassword(passwordEncoder.encode(newPassword));
+        userEntity.setResetToken(null);
+        userRepository.save(userEntity);
+    }
+
+    @Override
     public UserEntity createUser(final UserModel userModel)
     {
         final UserEntity newUser = new UserEntity();

@@ -15,5 +15,7 @@ public interface UserService
 
     void createResetToken(UserEntity userEntity);
 
+    void resetUserPassword(UserEntity userEntity, String newPassword);
+
     UserEntity createUser(UserModel userModel);
 }
