@@ -11,11 +11,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
-@Component
+@Service
 public class UserServiceImpl
         implements UserService, UserDetailsService
 {
@@ -42,6 +43,13 @@ public class UserServiceImpl
     public Optional<UserEntity> findByEmail(final String email)
     {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public void createResetToken(final UserEntity userEntity)
+    {
+        userEntity.setResetToken(UUID.randomUUID().toString());
+        userRepository.save(userEntity);
     }
 
     @Override

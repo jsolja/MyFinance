@@ -11,5 +11,7 @@ public interface UserService
 
     Optional<UserEntity> findByEmail(String email);
 
+    void createResetToken(UserEntity userEntity);
+
     UserEntity createUser(UserModel userModel);
 }
