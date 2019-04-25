@@ -48,4 +48,5 @@ public class PasswordController
         }
         return VIEW_FORGOTTEN_PASSWORD;
     }
+
 }

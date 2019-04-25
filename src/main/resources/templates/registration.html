@@ -26,7 +26,6 @@
                     <input class="input100" type="email" id="email" name="email" placeholder="Email" th:field="*{email}" required="required" maxlength="30">
                     <span class="focus-input100"></span>
                 </div>
-
                 <div class="fail-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                 <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
                     <input class="input100" type="text" id="username" name="username" placeholder="Username" th:field="*{username}" required="required" minlength="3" maxlength="20">
