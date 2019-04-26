@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
 </head>
 <body>
-<span>Welcome, <span th:text="${userEntity.firstName}"></span> <span th:text="${userEntity.lastName}"></span>. This page can only be seen if you're logged in!</span>
-<a href="/logout">Log out</a>
+<div class="sidenav">
+    <a href="/user/home" class="brand">MyFinance</a>
+    <a href="#">Home</a>
+    <a href="#">Profile</a>
+    <a href="#">Transactions</a>
+    <a href="#">Monthly Report</a>
+    <a href="#">Yearly Report</a>
+    <a href="/logout" class="log-out">Log out</a>
+</div>
+
+<div class="main">
+    <h2>Sidenav Example</h2>
+    <p>This sidenav is always shown.</p>
+</div>
+
 </body>
 </html>

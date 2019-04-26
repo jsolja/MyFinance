@@ -13,11 +13,6 @@
   src: url('../fonts/JosefinSans/JosefinSans-Bold.ttf');
 }
 
-
-
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
-
 * {
 	margin: 0px;
 	padding: 0px;
@@ -29,7 +24,6 @@ body, html {
 	font-family: Ubuntu-Regular, sans-serif;
 }
 
-/*---------------------------------------------*/
 a {
 	font-family: Ubuntu-Regular;
 	font-size: 14px;
@@ -51,7 +45,6 @@ a:hover {
   color: #1b3815;
 }
 
-/*---------------------------------------------*/
 h1,h2,h3,h4,h5,h6 {
 	margin: 0px;
 }
@@ -69,8 +62,6 @@ ul, li {
 	list-style-type: none;
 }
 
-
-/*---------------------------------------------*/
 input {
 	outline: none;
 	border: none;
@@ -96,7 +87,6 @@ textarea:focus, input:focus {
   border-color: transparent !important;
 }
 
-
 input::-webkit-input-placeholder { color: #1b3815;}
 input:-moz-placeholder { color: #1b3815;}
 input::-moz-placeholder { color: #1b3815;}
@@ -107,7 +97,6 @@ textarea:-moz-placeholder { color: #1b3815;}
 textarea::-moz-placeholder { color: #1b3815;}
 textarea:-ms-input-placeholder { color: #1b3815;}
 
-/*---------------------------------------------*/
 button {
 	outline: none !important;
 	border: none;
@@ -122,8 +111,6 @@ iframe {
 	border: none !important;
 }
 
-/*//////////////////////////////////////////////////////////////////
-[ Utility ]*/
 .txt1 {
   font-family: Ubuntu-Regular;
   font-size: 15px;
@@ -134,21 +121,17 @@ iframe {
 .txt2 {
   font-family: Ubuntu-Regular;
   font-size: 15px;
-  color: #57b846;
+  color: #2196F3;
   line-height: 1.4;
 }
 
 .txt3 {
   font-family: Ubuntu-Bold;
   font-size: 15px;
-  color: #57b846;
+  color: #2196F3;
   line-height: 1.4;
   text-transform: uppercase;
 }
-
-
-/*//////////////////////////////////////////////////////////////////
-[ login ]*/
 
 .limiter {
   width: 100%;
@@ -183,10 +166,6 @@ iframe {
   -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
-
-/*==================================================================
-[ Form ]*/
-
 .login100-form {
   width: 100%;
   position: relative;
@@ -204,13 +183,10 @@ iframe {
   width: 100%;
   top: 0;
   left: 0;
-  background-color: #57b846;
+  background-color: #2196F3;
   padding-top: 50px;
   padding-bottom: 39px;
 }
-
-/*------------------------------------------------------------------
-[ Input ]*/
 
 .wrap-input100 {
   width: 100%;
@@ -235,8 +211,6 @@ iframe {
   padding: 0 35px 0 35px;
 }
 
-/*------------------------------------------------------------------
-[ Button ]*/
 .container-login100-form-btn {
   width: 100%;
   display: -webkit-box;
@@ -259,7 +233,7 @@ iframe {
   padding: 0 20px;
   width: 100%;
   height: 50px;
-  background-color: #57b846;
+  background-color: #2196F3;
   border-radius: 25px;
 
   font-family: Ubuntu-Bold;
@@ -275,12 +249,8 @@ iframe {
 }
 
 .login100-form-btn:hover {
-  background-color: #1b3815;
+  background-color: darkblue;
 }
-
-
-/*------------------------------------------------------------------
-[ Alert validate ]*/
 
 .validate-input {
   position: relative;
@@ -348,8 +318,6 @@ iframe {
   }
 }
 
-/*//////////////////////////////////////////////////////////////////
-[ Responsive ]*/
 @media (max-width: 576px) {
   .login100-form {
     padding-left: 15px;
@@ -366,5 +334,73 @@ iframe {
 .success-message {
     padding-bottom: 10px;
     text-align: center;
-    color: #57b846;
+    color: #2196F3;
+}
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #2196F3;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: black;
+}
+
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.brand {
+    font-size: 24px !important;
+}
+
+.log-out {
+    position: fixed;
+    bottom:2%;
+}
+
+.p-t-13 {padding-top: 13px;}
+.p-t-170 {padding-top: 170px;}
+.p-t-178 {padding-top: 178px;}
+.p-b-9 {padding-bottom: 9px;}
+.p-b-23 {padding-bottom: 23px;}
+.p-b-40 {padding-bottom: 40px;}
+.p-l-50 {padding-left: 50px;}
+.p-l-55 {padding-left: 50px;}
+.p-r-55 {padding-right: 55px;}
+.m-b-16 {margin-bottom: 16px;}
+.text-right {text-align: right;}
+.flex-col-c {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction: column;
+	-ms-align-items: center;
+	align-items: center;
 }
