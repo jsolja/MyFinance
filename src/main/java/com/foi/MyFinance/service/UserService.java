@@ -17,5 +17,7 @@ public interface UserService
 
     void resetUserPassword(UserEntity userEntity, String newPassword);
 
+    void activateUser(UserEntity userEntity);
+
     UserEntity createUser(UserModel userModel);
 }

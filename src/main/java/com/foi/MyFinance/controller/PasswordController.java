@@ -5,7 +5,6 @@ import com.foi.MyFinance.facade.EmailFacade;
 import com.foi.MyFinance.facade.UserFacade;
 import com.foi.MyFinance.model.ForgotPasswordModel;
 import com.foi.MyFinance.model.ResetPasswordModel;
-import com.foi.MyFinance.validation.PasswordFieldsValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,9 +32,6 @@ public class PasswordController
     private static final String REDIRECT = "redirect";
     private static final String COLON = ":";
     private static final String URL_LOGIN = "/login?passwordChangeSuccessful";
-
-    @Autowired
-    private PasswordFieldsValidator passwordFieldsValidator;
 
     @Autowired
     private EmailFacade emailFacade;

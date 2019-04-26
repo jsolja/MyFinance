@@ -20,4 +20,10 @@ public class EmailFacadeImpl implements EmailFacade
     {
         emailService.sendForgottenPasswordEmail(userEntity, request);
     }
+
+    @Override
+    public void sendActivationEmail(final UserEntity userEntity, final HttpServletRequest request)
+    {
+        emailService.sendActivationEmail(userEntity, request);
+    }
 }
