@@ -79,7 +79,7 @@ public class PasswordController
             @RequestParam("token")
             final String token, final Model model)
     {
-        final Optional<UserEntity> optionalUserEntity = userFacade.findByResetToken(token);
+        final Optional<UserEntity> optionalUserEntity = userFacade.findByToken(token);
         if (!optionalUserEntity.isPresent())
         {
             model.addAttribute(MODEL_ATTRIBUTE_ERROR, MODEL_ATTRIBUTE_RESET_PASSWORD_MESSAGE);
@@ -97,7 +97,7 @@ public class PasswordController
             final ResetPasswordModel resetPasswordModel,
             final Model model)
     {
-        final Optional<UserEntity> optionalUserEntity = userFacade.findByResetToken(resetPasswordModel.getToken());
+        final Optional<UserEntity> optionalUserEntity = userFacade.findByToken(resetPasswordModel.getToken());
         if (!optionalUserEntity.isPresent())
         {
             model.addAttribute(MODEL_ATTRIBUTE_ERROR, MODEL_ATTRIBUTE_RESET_PASSWORD_MESSAGE);

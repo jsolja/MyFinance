@@ -52,9 +52,9 @@ public class UserServiceImpl
     }
 
     @Override
-    public void createResetToken(final UserEntity userEntity)
+    public void createToken(final UserEntity userEntity)
     {
-        userEntity.setResetToken(UUID.randomUUID().toString());
+        userEntity.setToken(UUID.randomUUID().toString());
         userRepository.save(userEntity);
     }
 
@@ -62,7 +62,7 @@ public class UserServiceImpl
     public void resetUserPassword(final UserEntity userEntity, final String newPassword)
     {
         userEntity.setPassword(passwordEncoder.encode(newPassword));
-        userEntity.setResetToken(null);
+        userEntity.setToken(null);
         userRepository.save(userEntity);
     }
 

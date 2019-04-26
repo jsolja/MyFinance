@@ -42,7 +42,7 @@ public class EmailServiceImpl implements EmailService
     public void sendForgottenPasswordEmail(
             final UserEntity userEntity, final HttpServletRequest request)
     {
-        userService.createResetToken(userEntity);
+        userService.createToken(userEntity);
         final String appUrl = request.getScheme() + COLON + SLASH + SLASH + request.getServerName() + COLON + request
                 .getServerPort() + request.getContextPath();
         final SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
@@ -50,7 +50,7 @@ public class EmailServiceImpl implements EmailService
         passwordResetEmail.setTo(userEntity.getEmail());
         passwordResetEmail.setSubject(emailPasswordResetSubject);
         passwordResetEmail.setText(emailTextPasswordReset + appUrl + URL_RESET_PASSWORD + QUESTION_MARK + TOKEN + EQUALS + userEntity
-                .getResetToken());
+                .getToken());
         javaMailSender.send(passwordResetEmail);
     }
 }

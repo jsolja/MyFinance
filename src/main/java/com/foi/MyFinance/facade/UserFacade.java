@@ -15,5 +15,5 @@ public interface UserFacade
 
     Optional<UserEntity> findByUsername(String username);
 
-    Optional<UserEntity> findByResetToken(String token);
+    Optional<UserEntity> findByToken(String token);
 }

@@ -40,7 +40,7 @@ public class UserFacadeImpl implements UserFacade
     }
 
     @Override
-    public Optional<UserEntity> findByResetToken(final String token)
+    public Optional<UserEntity> findByToken(final String token)
     {
         return userService.findByResetToken(token);
     }
