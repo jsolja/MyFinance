@@ -11,11 +11,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
-@Component
+@Service
 public class UserServiceImpl
         implements UserService, UserDetailsService
 {
@@ -45,10 +46,39 @@ public class UserServiceImpl
     }
 
     @Override
+    public Optional<UserEntity> findByResetToken(final String token)
+    {
+        return userRepository.findByToken(token);
+    }
+
+    @Override
+    public void createToken(final UserEntity userEntity)
+    {
+        userEntity.setToken(UUID.randomUUID().toString());
+        userRepository.save(userEntity);
+    }
+
+    @Override
+    public void resetUserPassword(final UserEntity userEntity, final String newPassword)
+    {
+        userEntity.setPassword(passwordEncoder.encode(newPassword));
+        userEntity.setToken(null);
+        userRepository.save(userEntity);
+    }
+
+    @Override
+    public void activateUser(final UserEntity userEntity)
+    {
+        userEntity.setActive(true);
+        userEntity.setToken(null);
+        userRepository.save(userEntity);
+    }
+
+    @Override
     public UserEntity createUser(final UserModel userModel)
     {
         final UserEntity newUser = new UserEntity();
-        newUser.setActive(true); //we will change that later when we implemented user activation
+        newUser.setActive(false);
         newUser.setEmail(userModel.getEmail());
         newUser.setFirstName(userModel.getFirstName());
         newUser.setLastName(userModel.getLastName());

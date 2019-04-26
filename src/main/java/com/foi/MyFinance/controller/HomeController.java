@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController
 {
     private static final String MODEL_ATTRIBUTE_USER_ENTITY = "userEntity";
-
     private static final String URL_HOME = "/user/home";
     private static final String VIEW_HOME = "home";
 

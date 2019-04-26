@@ -51,8 +51,8 @@ public class UserEntity implements UserDetails
     @Column(name = "active")
     private boolean active;
 
-    @Column(name = "reset_token")
-    private String resetToken;
+    @Column(name = "token")
+    private String token;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -205,13 +205,13 @@ public class UserEntity implements UserDetails
         this.role = role;
     }
 
-    public String getResetToken()
+    public String getToken()
     {
-        return this.resetToken;
+        return this.token;
     }
 
-    public void setResetToken(final String resetToken)
+    public void setToken(final String token)
     {
-        this.resetToken = resetToken;
+        this.token = token;
     }
 }
