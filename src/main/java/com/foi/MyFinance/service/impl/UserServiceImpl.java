@@ -48,13 +48,13 @@ public class UserServiceImpl
     @Override
     public Optional<UserEntity> findByResetToken(final String token)
     {
-        return userRepository.findByResetToken(token);
+        return userRepository.findByToken(token);
     }
 
     @Override
-    public void createResetToken(final UserEntity userEntity)
+    public void createToken(final UserEntity userEntity)
     {
-        userEntity.setResetToken(UUID.randomUUID().toString());
+        userEntity.setToken(UUID.randomUUID().toString());
         userRepository.save(userEntity);
     }
 
@@ -62,7 +62,15 @@ public class UserServiceImpl
     public void resetUserPassword(final UserEntity userEntity, final String newPassword)
     {
         userEntity.setPassword(passwordEncoder.encode(newPassword));
-        userEntity.setResetToken(null);
+        userEntity.setToken(null);
+        userRepository.save(userEntity);
+    }
+
+    @Override
+    public void activateUser(final UserEntity userEntity)
+    {
+        userEntity.setActive(true);
+        userEntity.setToken(null);
         userRepository.save(userEntity);
     }
 
@@ -70,7 +78,7 @@ public class UserServiceImpl
     public UserEntity createUser(final UserModel userModel)
     {
         final UserEntity newUser = new UserEntity();
-        newUser.setActive(true); //we will change that later when we implemented user activation
+        newUser.setActive(false);
         newUser.setEmail(userModel.getEmail());
         newUser.setFirstName(userModel.getFirstName());
         newUser.setLastName(userModel.getLastName());

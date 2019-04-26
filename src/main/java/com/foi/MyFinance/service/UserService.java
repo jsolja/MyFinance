@@ -13,9 +13,11 @@ public interface UserService
 
     Optional<UserEntity> findByResetToken(String token);
 
-    void createResetToken(UserEntity userEntity);
+    void createToken(UserEntity userEntity);
 
     void resetUserPassword(UserEntity userEntity, String newPassword);
+
+    void activateUser(UserEntity userEntity);
 
     UserEntity createUser(UserModel userModel);
 }

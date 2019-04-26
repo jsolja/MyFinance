@@ -16,6 +16,12 @@ public class UserFacadeImpl implements UserFacade
     private UserService userService;
 
     @Override
+    public void activateUser(final UserEntity userEntity)
+    {
+        userService.activateUser(userEntity);
+    }
+
+    @Override
     public void resetUserPassword(final UserEntity userEntity, final String newPassword)
     {
         userService.resetUserPassword(userEntity, newPassword);
@@ -40,7 +46,7 @@ public class UserFacadeImpl implements UserFacade
     }
 
     @Override
-    public Optional<UserEntity> findByResetToken(final String token)
+    public Optional<UserEntity> findByToken(final String token)
     {
         return userService.findByResetToken(token);
     }
