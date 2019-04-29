@@ -6,7 +6,10 @@ import com.foi.MyFinance.model.UserModel;
 import com.foi.MyFinance.repository.RoleRepository;
 import com.foi.MyFinance.repository.UserRepository;
 import com.foi.MyFinance.service.UserService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -87,6 +90,44 @@ public class UserServiceImpl
         final Optional<RoleEntity> roleEntity = roleRepository.findByRole(ROLE_USER);
         roleEntity.ifPresent(newUser::setRole);
         return userRepository.save(newUser);
+    }
+
+    @Override
+    public UserEntity getUserEntity()
+    {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return findByUsername(authentication.getName()).get();
+    }
+
+    @Override
+    public void updateUser(final UserModel userModel)
+    {
+        final UserEntity userEntity = getUserEntity();
+        if (StringUtils.isNotEmpty(userModel.getUsername()))
+        {
+            userEntity.setUsername(userModel.getUsername());
+        }
+        if (StringUtils.isNotEmpty(userModel.getFirstName()))
+        {
+            userEntity.setFirstName(userModel.getFirstName());
+        }
+        if (StringUtils.isNotEmpty(userModel.getLastName()))
+        {
+            userEntity.setLastName(userModel.getLastName());
+        }
+        if (StringUtils.isNotEmpty(userModel.getEmail()))
+        {
+            userEntity.setEmail(userModel.getEmail());
+        }
+        if (StringUtils.isNotEmpty(userModel.getPassword()))
+        {
+            userEntity.setPassword(passwordEncoder.encode(userModel.getPassword()));
+        }
+        if (userModel.getBalance() != 0)
+        {
+            userEntity.setBalance((float) userModel.getBalance());
+        }
+        userRepository.save(userEntity);
     }
 
     @Override

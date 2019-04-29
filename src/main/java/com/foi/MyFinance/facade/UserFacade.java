@@ -11,6 +11,8 @@ public interface UserFacade
 
     void resetUserPassword(UserEntity userEntity, String newPassword);
 
+    void updateUser(UserModel userModel);
+
     UserEntity createUser(UserModel userModel);
 
     Optional<UserEntity> findByEmail(String email);
@@ -18,4 +20,8 @@ public interface UserFacade
     Optional<UserEntity> findByUsername(String username);
 
     Optional<UserEntity> findByToken(String token);
+
+    UserEntity getUserEntity();
+
+    UserModel getUserModel();
 }

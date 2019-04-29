@@ -8,7 +8,7 @@ public class UserModel
     private String email;
     private String password;
     private String matchingPassword;
-    private float balance;
+    private double balance;
 
     public String getUsername()
     {
@@ -70,12 +70,12 @@ public class UserModel
         this.matchingPassword = matchingPassword;
     }
 
-    public float getBalance()
+    public double getBalance()
     {
         return balance;
     }
 
-    public void setBalance(final float balance)
+    public void setBalance(final double balance)
     {
         this.balance = balance;
     }
