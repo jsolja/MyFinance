@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
+    <title>Transaction</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/css/main.css"/>
 </head>
@@ -21,45 +21,42 @@
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
-                <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" th:action="@{/user/profile}" th:object="${userModel}" method="post">
+                <form id="transactionForm" class="login100-form validate-form p-l-55 p-r-55 p-t-178" th:action="@{/user/transaction}" th:object="${transactionModel}" method="post">
                     <span class="login100-form-title">
-                        Profile Update
+                        Transactions
                     </span>
                     <div class="wrap-input100 validate-input m-b-16">
-                        <input class="input100" type="text" id="username" name="username" th:field="*{username}" style="font-weight: bold" readonly="readonly">
+                        <input class="input100" type="text" id="fromUser" name="fromUser" placeholder="Sender" th:field="*{fromUser}" required="required" minlength="3" maxlength="255">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="fail-message" th:if="${#fields.hasErrors('fromUser')}" th:errors="*{fromUser}"></div>
+                    <div class="wrap-input100 validate-input m-b-16">
+                        <input class="input100" type="text" id="toUser" name="toUser" placeholder="Recipient" th:field="*{toUser}" required="required" minlength="3" maxlength="255">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="fail-message" th:if="${#fields.hasErrors('toUser')}" th:errors="*{toUser}"></div>
+                    <div class="wrap-input100 validate-input m-b-16">
+                        <input class="input100" type="text" id="details" name="details" placeholder="Details" th:field="*{details}" required="required" maxlength="100">
                         <span class="focus-input100"></span>
                     </div>
                     <div class="wrap-input100 validate-input m-b-16">
-                        <input class="input100" id="firstName" name="firstName" th:field="*{firstName}" required="required" minlength="3" maxlength="15">
+                        <input class="input100" type="date" id="date" name="date" th:field="*{date}" required="required">
                         <span class="focus-input100"></span>
                     </div>
                     <div class="wrap-input100 validate-input m-b-16">
-                        <input class="input100" type="text" id="lastName" name="lastName" th:field="*{lastName}" required="required" minlength="3" maxlength="15">
+                        <input class="input100" type="number" id="amount" name="amount" th:field="*{amount}" required="required">
                         <span class="focus-input100"></span>
                     </div>
-                    <div class="wrap-input100 validate-input m-b-16">
-                        <input class="input100" type="email" id="email" name="email" th:field="*{email}" required="required" maxlength="30">
-                        <span class="focus-input100"></span>
-                    </div>
-                    <div class="fail-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-                    <div class="wrap-input100 validate-input m-b-16">
-                        <input class="input100" type="password" id="password" name="password" placeholder="Password" th:field="*{password}" required="required" minlength="3" maxlength="255">
-                        <span class="focus-input100"></span>
-                    </div>
-                    <div class="wrap-input100 validate-input m-b-16">
-                        <input class="input100" type="password" id="matchingPassword" name="matchingPassword" placeholder="Confirm password" th:field="*{matchingPassword}" required="required" minlength="3" maxlength="255">
-                        <span class="focus-input100"></span>
-                    </div>
-                    <div class="fail-message" th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}"></div>
+                    <select class="select_mate" th:field="*{type}" form="transactionForm">
+                        <option value="Income" th:text="Income"></option>
+                        <option value="Expense" th:text="Expense"></option>
+                    </select>
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn">
-                            Update
+                            Submit
                         </button>
                     </div>
-                    <br/>
                     <div class="success-message" th:if="${successMessage}" th:text="${successMessage}"></div>
-                    <br/>
-                    <br/>
                 </form>
             </div>
         </div>
