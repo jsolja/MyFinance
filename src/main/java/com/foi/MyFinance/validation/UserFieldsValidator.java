@@ -10,7 +10,7 @@ import org.springframework.validation.Validator;
 import org.thymeleaf.util.StringUtils;
 
 @Component
-public class RegistrationFieldsValidator implements Validator
+public class UserFieldsValidator implements Validator
 {
     private static final String MATCHING_PASSWORD_FIELD = "matchingPassword";
     private static final String MATCHING_PASSWORD_CODE = "validation.matching.password.error";

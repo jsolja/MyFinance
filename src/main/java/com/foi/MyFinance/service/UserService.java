@@ -20,4 +20,8 @@ public interface UserService
     void activateUser(UserEntity userEntity);
 
     UserEntity createUser(UserModel userModel);
+
+    UserEntity getUserEntity();
+
+    void updateUser(UserModel userModel);
 }
