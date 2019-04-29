@@ -4,7 +4,7 @@ import com.foi.MyFinance.entity.UserEntity;
 import com.foi.MyFinance.facade.EmailFacade;
 import com.foi.MyFinance.facade.UserFacade;
 import com.foi.MyFinance.model.UserModel;
-import com.foi.MyFinance.validation.RegistrationFieldsValidator;
+import com.foi.MyFinance.validation.UserFieldsValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +33,7 @@ public class RegistrationController
     private static final String URL_LOGIN_ERROR = "/login?failedVerification";
 
     @Autowired
-    private RegistrationFieldsValidator registrationFieldsValidator;
+    private UserFieldsValidator userFieldsValidator;
 
     @Autowired
     private UserFacade userFacade;
@@ -57,7 +57,7 @@ public class RegistrationController
             final Model model,
             final HttpServletRequest request)
     {
-        ValidationUtils.invokeValidator(registrationFieldsValidator, userModel, result);
+        ValidationUtils.invokeValidator(userFieldsValidator, userModel, result);
         if (!result.hasErrors())
         {
             model.addAttribute(MODEL_ATTRIBUTE_SUCCESS, MODEL_ATTRIBUTE_SUCCESS_MESSAGE + userModel.getEmail());
