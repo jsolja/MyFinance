@@ -1,6 +1,6 @@
 package com.foi.MyFinance.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class TransactionModel
 {
