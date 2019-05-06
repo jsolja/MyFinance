@@ -61,5 +61,4 @@ public class TransactionServiceImpl implements TransactionService
         }
         userRepository.save(userEntity);
     }
-
 }

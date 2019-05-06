@@ -70,9 +70,7 @@ public class TransactionFieldsValidator implements Validator
         }
 
         if (!StringUtils.equals(transactionModel.getType(), INCOME) && !StringUtils.equals(
-                transactionModel.getType(),
-                EXPENSE
-        ))
+                transactionModel.getType(), EXPENSE))
         {
             errors.rejectValue(TYPE_FIELD, TYPE_CODE);
         }
