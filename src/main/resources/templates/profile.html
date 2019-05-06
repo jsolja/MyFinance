@@ -11,7 +11,7 @@
     <a href="/user/home" class="brand">MyFinance</a>
     <a href="/user/home">Home</a>
     <a href="/user/profile">Profile</a>
-    <a href="#">Transactions</a>
+    <a href="/user/transaction">Transactions</a>
     <a href="#">Monthly Report</a>
     <a href="#">Yearly Report</a>
     <a href="/logout" class="log-out">Log out</a>
@@ -22,9 +22,9 @@
         <div class="container-login100">
             <div class="wrap-login100">
                 <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" th:action="@{/user/profile}" th:object="${userModel}" method="post">
-                <span class="login100-form-title">
-                    Profile Update
-                </span>
+                    <span class="login100-form-title">
+                        Profile Update
+                    </span>
                     <div class="wrap-input100 validate-input m-b-16">
                         <input class="input100" type="text" id="username" name="username" th:field="*{username}" style="font-weight: bold" readonly="readonly">
                         <span class="focus-input100"></span>
