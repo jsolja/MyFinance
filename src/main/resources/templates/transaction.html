@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Transaction</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <script type="text/javascript" src="/js/main.js"></script>
 </head>
 <body>
 <div class="sidenav">
@@ -44,24 +46,35 @@
                         <span class="focus-input100"></span>
                     </div>
                     <div class="wrap-input100 validate-input m-b-16">
-                        <input class="input100" type="number" id="amount" name="amount" th:field="*{amount}" required="required">
+                        <input class="input100" type="number" id="amount" name="amount" placeholder="Amount" th:field="*{amount}" required="required">
                         <span class="focus-input100"></span>
                     </div>
-                    <select class="select_mate" th:field="*{type}" form="transactionForm">
-                        <option value="Income" th:text="Income"></option>
-                        <option value="Expense" th:text="Expense"></option>
-                    </select>
+                    <div class="container">
+                        <div class="dropdown">
+                            <div class="select">
+                                <span>Select Type</span>
+                                <i class="fa fa-chevron-left"></i>
+                            </div>
+                            <input type="hidden" name="gender">
+                            <ul class="dropdown-menu">
+                                <li id="income">Income</li>
+                                <li id="expense">Expense</li>
+                            </ul>
+                        </div>
+                        <span class="msg"></span>
+                    </div>
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn">
                             Submit
                         </button>
                     </div>
+                    <br>
+                    <br>
                     <div class="success-message" th:if="${successMessage}" th:text="${successMessage}"></div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>
