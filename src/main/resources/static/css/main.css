@@ -469,3 +469,9 @@ span.choose {
 .dropdown .dropdown-menu li:active {
     background-color: #e2e2e2
 }
+
+.balance {
+    color: green;
+    display: table;
+    margin: 0 auto;
+}
