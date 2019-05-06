@@ -1,5 +1,6 @@
 package com.foi.MyFinance.controller;
 
+import com.foi.MyFinance.facade.TransactionFacade;
 import com.foi.MyFinance.facade.UserFacade;
 import com.foi.MyFinance.model.TransactionModel;
 import com.foi.MyFinance.validation.TransactionFieldsValidator;
@@ -28,6 +29,9 @@ public class TransactionController
     private UserFacade userFacade;
 
     @Autowired
+    private TransactionFacade transactionFacade;
+
+    @Autowired
     private TransactionFieldsValidator transactionFieldsValidator;
 
     @RequestMapping(value = URL_TRANSACTION, method = RequestMethod.GET)
@@ -47,6 +51,7 @@ public class TransactionController
         ValidationUtils.invokeValidator(transactionFieldsValidator, transactionModel, bindingResult);
         if (!bindingResult.hasErrors())
         {
+            transactionFacade.makeTransaction(transactionModel);
             model.addAttribute(MODEL_ATTRIBUTE_SUCCESS, MODEL_ATTRIBUTE_SUCCESS_MESSAGE);
         }
         model.addAttribute(MODEL_ATTRIBUTE_USER_BALANCE, userFacade.getUserModel().getBalance());
