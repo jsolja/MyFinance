@@ -18,6 +18,8 @@ $(document).ready(function () {
         $(this).parents('.dropdown').find('input').attr('value', $(this).attr('id'));
     });
 
+    $('#transactionTable').DataTable();
+
 });
 
 
