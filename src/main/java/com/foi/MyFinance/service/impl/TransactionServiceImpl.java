@@ -10,6 +10,7 @@ import com.foi.MyFinance.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,6 +44,12 @@ public class TransactionServiceImpl implements TransactionService
         userEntity.ifPresent(newTransaction::setUserEntity);
         updateBalance(newTransaction);
         return transactionRepository.save(newTransaction);
+    }
+
+    @Override
+    public List<TransactionEntity> findByUser(final UserEntity userEntity)
+    {
+        return transactionRepository.findByUser(userEntity);
     }
 
     private void updateBalance(final TransactionEntity transactionEntity)

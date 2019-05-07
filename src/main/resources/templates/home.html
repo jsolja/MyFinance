@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/js/main.js"></script>
+
 </head>
 <body>
 <div class="sidenav">
@@ -17,10 +26,34 @@
     <a href="/logout" class="log-out">Log out</a>
 </div>
 
-<div class="main">
-    <h2>Sidenav Example</h2>
-    <p>This sidenav is always shown.</p>
+<div class="homepage">
+    <table id="transactionTable" class="table table-striped table-bordered" cellspacing="0" width="100%" th:object="${transactions}" th:if="${transactions.size()} > 0">
+        <thead>
+        <tr class="tableHeader">
+            <th scope="col" th:text="Sender"></th>
+            <th scope="col" th:text="Receiver"></th>
+            <th scope="col" th:text="Details"></th>
+            <th scope="col" th:text="Amount"></th>
+            <th scope="col" th:text="Type"></th>
+            <th scope="col" th:text="Date"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="transaction : ${transactions}" class="tableRow">
+            <td th:text="${transaction.getFromUser()}"></td>
+            <td th:text="${transaction.getToUser()}"></td>
+            <td th:text="${transaction.getDetails()}"></td>
+            <td th:text="'$' + ${transaction.getAmount()}"></td>
+            <td th:text="${transaction.getType()}"></td>
+            <td th:text="${#dates.format(transaction.getDate(), 'yyyy-MM-dd')}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="noTable" th:if="${transactions.size()} == 0">
+        <h3>You haven't made any transactions yet!</h3>
+        <br>
+        <img src="/image/image1_no_transactions.png" alt="No Transactions Found" height="100" width="100">
+    </div>
 </div>
-
 </body>
 </html>
