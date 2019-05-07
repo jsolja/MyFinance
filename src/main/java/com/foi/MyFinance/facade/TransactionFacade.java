@@ -11,4 +11,6 @@ public interface TransactionFacade
     TransactionEntity makeTransaction(TransactionModel transactionModel);
 
     List<TransactionEntity> findByUser(UserEntity userEntity);
+
+    List<TransactionEntity> findByUserAndChosenMonth(UserEntity userEntity, String date);
 }
