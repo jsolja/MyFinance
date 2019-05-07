@@ -21,14 +21,14 @@ import java.util.Optional;
 public class PasswordController
 {
     private static final String MODEL_ATTRIBUTE_FORGOT_PASSWORD_MODEL = "forgotPasswordModel";
-    private static final String VIEW_FORGOTTEN_PASSWORD = "forgottenPassword";
+    private static final String VIEW_FORGOTTEN_PASSWORD = "forgotten-password";
     private static final String MODEL_ATTRIBUTE_SUCCESS = "successMessage";
     private static final String MODEL_ATTRIBUTE_SUCCESS_MESSAGE = "Email with reset link has been sent to ";
     private static final String MODEL_ATTRIBUTE_ERROR = "error";
     private static final String MODEL_ATTRIBUTE_EMAIL_MESSAGE = "This email does not belong to any account!";
     private static final String MODEL_ATTRIBUTE_RESET_PASSWORD_MESSAGE = "This reset token is invalid or expired!";
     private static final String MODEL_ATTRIBUTE_RESET_PASSWORD_MODEL = "resetPasswordModel";
-    private static final String VIEW_RESET_PASSWORD = "resetPassword";
+    private static final String VIEW_RESET_PASSWORD = "reset-password";
     private static final String REDIRECT = "redirect";
     private static final String COLON = ":";
     private static final String URL_LOGIN = "/login?passwordChangeSuccessful";

@@ -10,6 +10,8 @@ import com.foi.MyFinance.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,8 @@ public class TransactionServiceImpl implements TransactionService
 {
     private static final String INCOME = "income";
     private static final String EXPENSE = "expense";
+    private static final String yyyy_MM_dd = "yyyy-MM-dd";
+    private static final String FIRST_DAY_OF_MONTH = "-01";
 
     @Autowired
     private TransactionRepository transactionRepository;
@@ -50,6 +54,19 @@ public class TransactionServiceImpl implements TransactionService
     public List<TransactionEntity> findByUser(final UserEntity userEntity)
     {
         return transactionRepository.findByUser(userEntity);
+    }
+
+    @Override
+    public List<TransactionEntity> findByUserAndChosenMonth(final UserEntity userEntity, final String beginDate)
+    {
+        final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(yyyy_MM_dd);
+        final LocalDate localDate = LocalDate.parse(beginDate + FIRST_DAY_OF_MONTH, dateFormat);
+        final LocalDate endDate = localDate.withDayOfMonth(localDate.lengthOfMonth());
+        return transactionRepository.findByUserAndDateBetween(
+                userEntity,
+                java.sql.Date.valueOf(beginDate + FIRST_DAY_OF_MONTH),
+                java.sql.Date.valueOf(endDate)
+        );
     }
 
     private void updateBalance(final TransactionEntity transactionEntity)
