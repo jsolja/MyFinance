@@ -475,3 +475,23 @@ span.choose {
     display: table;
     margin: 0 auto;
 }
+
+.homepage {
+    margin-left: 250px;
+    margin-top: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+}
+
+.tableRow {
+    text-align: center;
+    background-color: white !important;
+}
+
+.tableHeader {
+    background-color: white !important;
+}
+
+.noTable {
+    text-align: center;
+}
