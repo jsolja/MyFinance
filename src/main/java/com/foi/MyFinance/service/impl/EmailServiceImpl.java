@@ -20,7 +20,7 @@ public class EmailServiceImpl implements EmailService
     private static final String QUESTION_MARK = "?";
     private static final String TOKEN = "token";
     private static final String EQUALS = "=";
-    private static final String URL_RESET_PASSWORD = "/resetPassword";
+    private static final String URL_RESET_PASSWORD = "/reset-password";
     private static final String URL_VERIFY_ACCOUNT = "/verifyAccount";
 
     @Value("${spring.mail.properties.from}")

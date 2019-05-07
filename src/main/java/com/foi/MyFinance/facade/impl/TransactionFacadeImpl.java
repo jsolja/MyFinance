@@ -27,4 +27,11 @@ public class TransactionFacadeImpl implements TransactionFacade
     {
         return transactionService.findByUser(userEntity);
     }
+
+    @Override
+    public List<TransactionEntity> findByUserAndChosenMonth(final UserEntity userEntity, final String date)
+    {
+        return transactionService.findByUserAndChosenMonth(userEntity, date);
+    }
+
 }
