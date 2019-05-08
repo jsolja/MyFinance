@@ -22,6 +22,8 @@ public class TransactionServiceImpl implements TransactionService
     private static final String EXPENSE = "expense";
     private static final String yyyy_MM_dd = "yyyy-MM-dd";
     private static final String FIRST_DAY_OF_MONTH = "-01";
+    private static final String FIRST_DAY_OF_YEAR = "-01-01";
+    private static final String LAST_DAY_OF_YEAR = "-12-31";
 
     @Autowired
     private TransactionRepository transactionRepository;
@@ -66,6 +68,16 @@ public class TransactionServiceImpl implements TransactionService
                 userEntity,
                 java.sql.Date.valueOf(beginDate + FIRST_DAY_OF_MONTH),
                 java.sql.Date.valueOf(endDate)
+        );
+    }
+
+    @Override
+    public List<TransactionEntity> findByUserAndChosenYear(final UserEntity userEntity, final String year)
+    {
+        return transactionRepository.findByUserAndDateBetween(
+                userEntity,
+                java.sql.Date.valueOf(year + FIRST_DAY_OF_YEAR),
+                java.sql.Date.valueOf(year + LAST_DAY_OF_YEAR)
         );
     }
 
