@@ -3,9 +3,9 @@
 $(document).ready(function () {
 
     $('.dropdown').click(function () {
-            $(this).attr('tabindex', 1).focus();
-            $(this).toggleClass('active');
-            $(this).find('.dropdown-menu').slideToggle(300);
+        $(this).attr('tabindex', 1).focus();
+        $(this).toggleClass('active');
+        $(this).find('.dropdown-menu').slideToggle(300);
     });
 
     $('.dropdown').focusout(function () {
@@ -18,8 +18,17 @@ $(document).ready(function () {
         $(this).parents('.dropdown').find('input').attr('value', $(this).attr('id'));
     });
 
-    $('#transactionTable').DataTable();
-
+    var table = $('#transactionTable').DataTable();
+    var buttons = new $.fn.dataTable.Buttons(table, {
+        buttons: [{
+            extend: 'pdf',
+            className: 'form-control form-control-sm page-custom resize'
+        },
+        {
+            extend: 'csv',
+            className: 'form-control form-control-sm page-custom resize'
+        }]
+    }).container().appendTo($('#table-actions'));
 });
 
 

@@ -502,10 +502,14 @@ span.choose {
     display: inline;
 }
 
-.submit {
+.resize {
     width: 100px !important;
 }
 
 .space-above {
     margin-top: 20px !important;
+}
+
+.wrapper {
+    display: flex;
 }
