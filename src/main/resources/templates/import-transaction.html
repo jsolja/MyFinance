@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Import</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+
+</head>
+<body>
+<div class="sidenav">
+    <a href="/user/home" class="brand">MyFinance</a>
+    <a href="/user/home">Home</a>
+    <a href="/user/profile">Profile</a>
+    <a href="/user/transaction">Transactions</a>
+    <a href="/user/monthly-report">Monthly Report</a>
+    <a href="/user/yearly-report">Yearly Report</a>
+    <a href="/logout" class="log-out">Log out</a>
+</div>
+<div class="main">
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" th:action="@{/user/import-transaction}" method="post">
+                <span class="login100-form-title">
+                    Import transactions
+                </span>
+                    <div class="wrap-input100 m-b-16">
+                        <div class="input-container">
+                            <input type="file" name="file" id="file" required="required">
+                            <button class="browse-btn">
+                                Browse Files
+                            </button>
+                            <span class="file-info">Upload a file</span>
+                        </div>
+                        <span class="focus-input100"></span>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn">
+                            Import
+                        </button>
+                    </div>
+                    <div class="fail-message" th:if="${error}" th:text="${error}"></div>
+                    <br>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    const uploadButton = document.querySelector('.browse-btn');
+    const fileInfo = document.querySelector('.file-info');
+    const realInput = document.getElementById('file');
+
+    uploadButton.addEventListener('click', () => {
+        event.preventDefault();
+      realInput.click();
+    });
+
+    realInput.addEventListener('change', () => {
+      const name = realInput.value.split(/\\|\//).pop();
+      const truncated = name.length > 20
+        ? name.substr(name.length - 20)
+        : name;
+
+      fileInfo.innerHTML = truncated;
+    });
+</script>
+</html>

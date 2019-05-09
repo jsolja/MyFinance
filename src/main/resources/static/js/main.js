@@ -1,5 +1,3 @@
-
-
 $(document).ready(function () {
 
     $('.dropdown').click(function () {
@@ -29,6 +27,9 @@ $(document).ready(function () {
             className: 'form-control form-control-sm page-custom resize'
         }]
     }).container().appendTo($('#table-actions'));
+
+
+
 });
 
 
