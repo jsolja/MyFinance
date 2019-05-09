@@ -54,7 +54,26 @@
         </tr>
         </tbody>
     </table>
-    <div id="table-actions">
+
+    <div class="wrapper" th:if="${transactions.size()} > 0">
+        <div id="table-actions">
+        </div>
+        <form th:action="@{/user/import}" method="post" class="import-transactions-form-home">
+            <div class="input-container-home">
+                <input type="file" name="file" id="file" required="required">
+                <button class="browse-btn-home">
+                    Browse Files
+                </button>
+                <span class="file-info">Upload a file</span>
+            </div>
+            <input class="form-control form-control-sm page-custom resize" type="submit" name="submit" id="submit" value="Open" style="display: none"/>
+            <div class="fail-message" th:if="${error}">
+                An error occurred while importing transactions! Did you double check CSV data?
+            </div>
+            <div class="success-message" th:if="${error eq false}">
+                Transactions are successfully imported.
+            </div>
+        </form>
     </div>
     <div class="noTable" th:if="${transactions.size()} == 0">
         <h3>You haven't made any transactions yet! You can find the transactions on the left or import them <a class="import-link" href="/user/import-transaction">here</a></h3>
@@ -63,4 +82,24 @@
     </div>
 </div>
 </body>
+<script>
+    const uploadButton = document.querySelector('.browse-btn-home');
+    const fileInfo = document.querySelector('.file-info');
+    const realInput = document.getElementById('file');
+
+    uploadButton.addEventListener('click', () => {
+        event.preventDefault();
+        realInput.click();
+    });
+
+    realInput.addEventListener('change', () => {
+      const name = realInput.value.split(/\\|\//).pop();
+      const truncated = name.length > 20
+        ? name.substr(name.length - 20)
+        : name;
+
+      fileInfo.innerHTML = truncated;
+      document.getElementById("submit").style.display = "block";
+    });
+</script>
 </html>
