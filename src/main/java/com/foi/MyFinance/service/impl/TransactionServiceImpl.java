@@ -7,13 +7,19 @@ import com.foi.MyFinance.repository.TransactionRepository;
 import com.foi.MyFinance.repository.UserRepository;
 import com.foi.MyFinance.service.TransactionService;
 import com.foi.MyFinance.service.UserService;
+import com.opencsv.CSVReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
+import java.io.File;
+import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 public class TransactionServiceImpl implements TransactionService
@@ -33,6 +39,39 @@ public class TransactionServiceImpl implements TransactionService
 
     @Autowired
     private UserService userService;
+
+    @Override
+    public boolean importCsvTransactions(final String csvFilePath)
+    {
+        final String filePath = new File(csvFilePath).getAbsolutePath();
+        try (
+                final CSVReader csvReader = new CSVReader(new FileReader(filePath))
+        )
+        {
+            String[] data;
+            while ((data = csvReader.readNext()) != null)
+            {
+                final TransactionEntity newTransaction = new TransactionEntity();
+                newTransaction.setFromUser(data[0]);
+                newTransaction.setToUser(data[1]);
+                newTransaction.setDetails(data[2]);
+                newTransaction.setAmount(Integer.parseInt(data[3]));
+                newTransaction.setType(data[4]);
+                newTransaction.setDate(java.sql.Date.valueOf(data[5]));
+                final Optional<UserEntity> optionalUserEntity = userRepository.findByUsername(data[6]);
+                optionalUserEntity.ifPresent(newTransaction::setUserEntity);
+                if (!ObjectUtils.isEmpty(transactionRepository.save(newTransaction)))
+                {
+                    return false;
+                }
+            }
+        }
+        catch (final Exception ex)
+        {
+            Logger.getLogger(TransactionServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
 
     @Override
     public TransactionEntity makeTransaction(final TransactionModel transactionModel)

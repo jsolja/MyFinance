@@ -17,6 +17,12 @@ public class TransactionFacadeImpl implements TransactionFacade
     private TransactionService transactionService;
 
     @Override
+    public boolean importCsvTransactions(final String csvFilePath)
+    {
+        return transactionService.importCsvTransactions(csvFilePath);
+    }
+
+    @Override
     public TransactionEntity makeTransaction(final TransactionModel transactionModel)
     {
         return transactionService.makeTransaction(transactionModel);
