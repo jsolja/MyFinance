@@ -41,7 +41,13 @@
                             Import
                         </button>
                     </div>
-                    <div class="fail-message" th:if="${error}" th:text="${error}"></div>
+                    <br>
+                    <div class="fail-message" th:if="${error}">
+                        An error occurred while importing transactions! Did you double check CSV data?
+                    </div>
+                    <div class="success-message" th:if="${error eq false}">
+                        Transactions are successfully imported.
+                    </div>
                     <br>
                     <br>
                 </form>

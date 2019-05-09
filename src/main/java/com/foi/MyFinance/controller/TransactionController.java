@@ -27,6 +27,7 @@ public class TransactionController
     private static final String MODEL_ATTRIBUTE_SUCCESS_MESSAGE = "You have successfully created transaction.";
     private static final String URL_IMPORT_TRANSACTION = "/user/import-transaction";
     private static final String VIEW_IMPORT_TRANSACTION = "import-transaction";
+    private static final String MODEL_ATTRIBUTE_ERROR = "error";
 
     @Autowired
     private UserFacade userFacade;
@@ -73,7 +74,7 @@ public class TransactionController
             final
             String file, final Model model)
     {
-        System.out.println(file);
+        model.addAttribute(MODEL_ATTRIBUTE_ERROR, transactionFacade.importCsvTransactions(file));
         return VIEW_IMPORT_TRANSACTION;
     }
 }
