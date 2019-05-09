@@ -12,6 +12,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
     <script src="/js/main.js"></script>
 </head>
 <body>
@@ -25,11 +31,15 @@
     <a href="/logout" class="log-out">Log out</a>
 </div>
 <div class="tablePage">
-    <form th:action="@{/user/yearly-report}" method="post">
-        <label for="year">Please input year: </label>
-        <input class="form-control form-control-sm page-custom" type="number" name="year" id="year" required="required" min="1000" max="9999"/>
-        <input class="form-control form-control-sm page-custom submit" type="submit" name="submit" id="submit" value="Open"/>
-    </form>
+    <div class="wrapper">
+        <form th:action="@{/user/yearly-report}" method="post">
+            <label for="year">Please input year: </label>
+            <input class="form-control form-control-sm page-custom resize" type="number" name="year" id="year" required="required" min="1000" max="9999"/>
+            <input class="form-control form-control-sm page-custom resize" type="submit" name="submit" id="submit" value="Open"/>
+        </form>
+        <div id="table-actions">
+        </div>
+    </div>
     <div th:if="${transactionTableSuccess}">
         <table id="transactionTable" class="table table-striped table-bordered space-above" cellspacing="0" width="100%">
             <thead>

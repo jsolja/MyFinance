@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface TransactionService
 {
+    boolean importCsvTransactions(String csvFilePath);
+
     TransactionEntity makeTransaction(TransactionModel transactionModel);
 
     List<TransactionEntity> findByUser(UserEntity userEntity);

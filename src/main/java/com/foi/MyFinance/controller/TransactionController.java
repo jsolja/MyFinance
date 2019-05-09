@@ -12,6 +12,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -24,6 +25,9 @@ public class TransactionController
     private static final String MODEL_ATTRIBUTE_USER_BALANCE = "balance";
     private static final String MODEL_ATTRIBUTE_SUCCESS = "successMessage";
     private static final String MODEL_ATTRIBUTE_SUCCESS_MESSAGE = "You have successfully created transaction.";
+    private static final String URL_IMPORT_TRANSACTION = "/user/import-transaction";
+    private static final String VIEW_IMPORT_TRANSACTION = "import-transaction";
+    private static final String MODEL_ATTRIBUTE_ERROR = "error";
 
     @Autowired
     private UserFacade userFacade;
@@ -56,5 +60,21 @@ public class TransactionController
         }
         model.addAttribute(MODEL_ATTRIBUTE_USER_BALANCE, userFacade.getUserModel().getBalance());
         return VIEW_TRANSACTION;
+    }
+
+    @RequestMapping(value = URL_IMPORT_TRANSACTION, method = RequestMethod.GET)
+    public String getViewImportTransaction(final Model model)
+    {
+        return VIEW_IMPORT_TRANSACTION;
+    }
+
+    @RequestMapping(value = URL_IMPORT_TRANSACTION, method = RequestMethod.POST)
+    public String postViewImportTransaction(
+            @RequestParam("file")
+            final
+            String file, final Model model)
+    {
+        model.addAttribute(MODEL_ATTRIBUTE_ERROR, transactionFacade.importCsvTransactions(file));
+        return VIEW_IMPORT_TRANSACTION;
     }
 }
