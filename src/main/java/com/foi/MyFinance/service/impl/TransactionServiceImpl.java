@@ -60,6 +60,7 @@ public class TransactionServiceImpl implements TransactionService
                 newTransaction.setDate(java.sql.Date.valueOf(data[5]));
                 final Optional<UserEntity> optionalUserEntity = userRepository.findByUsername(data[6]);
                 optionalUserEntity.ifPresent(newTransaction::setUserEntity);
+                updateBalance(newTransaction);
                 if (!ObjectUtils.isEmpty(transactionRepository.save(newTransaction)))
                 {
                     return false;

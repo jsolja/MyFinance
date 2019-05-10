@@ -528,24 +528,52 @@ span.choose {
   border: 1px solid #DFDFDF;
   border-radius: 5px;
 }
+
+.input-container-home {
+    border: 1px solid #ced4da;
+    border-radius: 0.2rem;
+    height: 31px;
+    width: 352px;
+    margin-left: 10px;
+}
+
 input[type='file'] {
-  display: none;
+    display: none;
 }
+
 .file-info {
-  font-size: 0.9em;
+    font-size: 0.9em;
 }
+
 .browse-btn {
-  background: #2196F3;
-  color: #fff;
-  min-height: 35px;
-  padding: 10px;
-  border: none;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+    background: #2196F3;
+    color: #fff;
+    min-height: 35px;
+    padding: 10px;
+    border: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
+
+.browse-btn-home {
+    background: #2196F3;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 0.15rem;
+    font-size: 0.875rem;
+    height: 29px;
+    width: 116px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
 .browse-btn:hover {
   background: #4ec0b4;
 }
+
 @media (max-width: 300px) {
   button {
     width: 100%;
@@ -557,4 +585,16 @@ input[type='file'] {
     display: block;
     margin: 10px 5px;
   }
+}
+
+.import-transactions-form-home{
+    display: -webkit-box;
+}
+
+.page-link:hover {
+    background-color: #fff;
+}
+
+.dataTables_wrapper, .dataTables_paginate, .paginate_button {
+    background-color: transparent !important;
 }
