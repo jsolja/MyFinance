@@ -17,6 +17,7 @@ public class HomeController
     private static final String MODEL_ATTRIBUTE_TRANSACTIONS = "transactions";
     private static final String URL_IMPORT_HOME = "/user/import";
     private static final String MODEL_ATTRIBUTE_ERROR = "error";
+    private static final String PARAMETER_FILE = "file";
 
     @Autowired
     private TransactionFacade transactionFacade;
@@ -33,7 +34,7 @@ public class HomeController
 
     @RequestMapping(value = URL_IMPORT_HOME, method = RequestMethod.POST)
     public String postImportHome(
-            @RequestParam("file")
+            @RequestParam(PARAMETER_FILE)
             final
             String file, final Model model)
     {

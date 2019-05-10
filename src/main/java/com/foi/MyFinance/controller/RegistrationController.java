@@ -31,6 +31,7 @@ public class RegistrationController
     private static final String COLON = ":";
     private static final String URL_LOGIN_SUCCESS = "/login?successfulVerification";
     private static final String URL_LOGIN_ERROR = "/login?failedVerification";
+    private static final String PARAMETER_TOKEN = "token";
 
     @Autowired
     private UserFieldsValidator userFieldsValidator;
@@ -70,7 +71,7 @@ public class RegistrationController
 
     @RequestMapping(value = VIEW_VERIFY_ACCOUNT, method = RequestMethod.GET)
     public String getViewVerifyAccount(
-            @RequestParam("token")
+            @RequestParam(PARAMETER_TOKEN)
             final String token)
     {
         final Optional<UserEntity> optionalUserEntity = userFacade.findByToken(token);

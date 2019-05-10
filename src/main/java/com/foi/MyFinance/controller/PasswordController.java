@@ -27,6 +27,9 @@ public class PasswordController
     private static final String REDIRECT = "redirect";
     private static final String COLON = ":";
     private static final String URL_LOGIN = "/login?passwordChangeSuccessful";
+    private static final String PARAMETER_TOKEN = "token";
+    private static final String PARAMETER_PASSWORD = "password";
+    private static final String PARAMETER_EMAIL = "email";
 
     @Autowired
     private EmailFacade emailFacade;
@@ -42,7 +45,7 @@ public class PasswordController
 
     @RequestMapping(value = VIEW_FORGOTTEN_PASSWORD, method = RequestMethod.POST)
     public String postViewForgottenPassword(
-            @RequestParam("email")
+            @RequestParam(PARAMETER_EMAIL)
             final
             String email,
             final Model model,
@@ -66,7 +69,7 @@ public class PasswordController
 
     @RequestMapping(value = VIEW_RESET_PASSWORD, method = RequestMethod.GET)
     public String getViewResetPassword(
-            @RequestParam("token")
+            @RequestParam(PARAMETER_TOKEN)
             final String token, final Model model)
     {
         final Optional<UserEntity> optionalUserEntity = userFacade.findByToken(token);
@@ -80,9 +83,9 @@ public class PasswordController
 
     @RequestMapping(value = VIEW_RESET_PASSWORD, method = RequestMethod.POST)
     public String postViewResetPassword(
-            @RequestParam("token")
+            @RequestParam(PARAMETER_TOKEN)
             final String token,
-            @RequestParam("password")
+            @RequestParam(PARAMETER_PASSWORD)
             final String password,
             final Model model)
     {
