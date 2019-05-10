@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     $('.dropdown').click(function () {
         $(this).attr('tabindex', 1).focus();
         $(this).toggleClass('active');
@@ -17,7 +16,7 @@ $(document).ready(function () {
     });
 
     var table = $('#transactionTable').DataTable();
-    var buttons = new $.fn.dataTable.Buttons(table, {
+    new $.fn.dataTable.Buttons(table, {
         buttons: [{
             extend: 'pdf',
             className: 'form-control form-control-sm page-custom resize'
@@ -27,9 +26,6 @@ $(document).ready(function () {
             className: 'form-control form-control-sm page-custom resize'
         }]
     }).container().appendTo($('#table-actions'));
-
-
-
 });
 
 
