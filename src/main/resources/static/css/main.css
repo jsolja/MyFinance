@@ -590,3 +590,11 @@ input[type='file'] {
 .import-transactions-form-home{
     display: -webkit-box;
 }
+
+.page-link:hover {
+    background-color: #fff;
+}
+
+.dataTables_wrapper, .dataTables_paginate, .paginate_button {
+    background-color: transparent !important;
+}

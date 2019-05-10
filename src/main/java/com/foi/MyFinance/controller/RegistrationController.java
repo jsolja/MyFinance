@@ -26,7 +26,7 @@ public class RegistrationController
     private static final String MODEL_ATTRIBUTE_SUCCESS = "successMessage";
     private static final String MODEL_ATTRIBUTE_SUCCESS_MESSAGE = "You have successfully registered. Confirmation link has been sent to ";
     private static final String VIEW_REGISTRATION = "registration";
-    private static final String VIEW_VERIFY_ACCOUNT = "verifyAccount";
+    private static final String VIEW_VERIFY_ACCOUNT = "verify-account";
     private static final String REDIRECT = "redirect";
     private static final String COLON = ":";
     private static final String URL_LOGIN_SUCCESS = "/login?successfulVerification";
