@@ -38,6 +38,12 @@ public class UserFacadeImpl implements UserFacade
     }
 
     @Override
+    public void createToken(UserEntity userEntity)
+    {
+        userService.createToken(userEntity);
+    }
+
+    @Override
     public UserEntity createUser(final UserModel userModel)
     {
         return userService.createUser(userModel);

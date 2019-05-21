@@ -13,6 +13,8 @@ public interface UserFacade
 
     void updateUser(UserModel userModel);
 
+    void createToken(UserEntity userEntity);
+
     UserEntity createUser(UserModel userModel);
 
     Optional<UserEntity> findByEmail(String email);
