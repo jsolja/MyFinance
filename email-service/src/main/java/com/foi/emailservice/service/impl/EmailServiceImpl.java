@@ -73,14 +73,12 @@ public class EmailServiceImpl implements EmailService
     @Override
     public boolean sendActivationEmail(final UserEntity userEntity, final HttpServletRequest request)
     {
-        //        userService.createToken(userEntity); //prebaciti u user service
-        final String appUrl = request.getScheme() + COLON + SLASH + SLASH + request.getServerName() + COLON + request
-                .getServerPort() + request.getContextPath();
+        ServiceInstance userServiceInstance = discoveryClient.getInstances(USER_SERVICE).get(0);
         final SimpleMailMessage activationEmail = new SimpleMailMessage();
         activationEmail.setFrom(fromEmail);
         activationEmail.setTo(userEntity.getEmail());
         activationEmail.setSubject(emailActivationSubject);
-        activationEmail.setText(emailActivationText + appUrl + URL_VERIFY_ACCOUNT + QUESTION_MARK + TOKEN + EQUALS
+        activationEmail.setText(emailActivationText + userServiceInstance.getUri() + URL_VERIFY_ACCOUNT + QUESTION_MARK + TOKEN + EQUALS
                 + userEntity.getToken());
         try
         {
