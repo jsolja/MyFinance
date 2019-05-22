@@ -5,14 +5,17 @@ import com.foi.userservice.facade.UserFacade;
 import com.foi.userservice.model.UserModel;
 import com.foi.userservice.validation.UserFieldsValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -31,12 +34,18 @@ public class RegistrationController
     private static final String URL_LOGIN_SUCCESS = "/login?successfulVerification";
     private static final String URL_LOGIN_ERROR = "/login?failedVerification";
     private static final String PARAMETER_TOKEN = "token";
+    private static final String MODEL_ATTRIBUTE_ERROR = "error";
+    private static final String MODEL_ATTRIBUTE_ERROR_MESSAGE = "Something went wrong with email sending.";
+    private static final String EMAIL_SERVICE_URL = "http://email-service/send-activation-email";
 
     @Autowired
     private UserFieldsValidator userFieldsValidator;
 
     @Autowired
     private UserFacade userFacade;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @RequestMapping(value = VIEW_REGISTRATION, method = RequestMethod.GET)
     public String getViewRegistration(final Model model)
@@ -57,13 +66,26 @@ public class RegistrationController
         ValidationUtils.invokeValidator(userFieldsValidator, userModel, result);
         if (!result.hasErrors())
         {
-            model.addAttribute(MODEL_ATTRIBUTE_SUCCESS, MODEL_ATTRIBUTE_SUCCESS_MESSAGE + userModel.getEmail());
-            userFacade.createUser(userModel);
-            final Optional<UserEntity> optionalUserEntity = userFacade.findByEmail(userModel.getEmail());
-
-            System.out.println("RegistrationController linija 67");
-            //            emailFacade.sendActivationEmail(optionalUserEntity.get(), request); POSLATI EMAIL
-
+            UserEntity userEntity = userFacade.createUser(userModel);
+            userFacade.createToken(userEntity);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity entity = new HttpEntity(userEntity, headers);
+            ResponseEntity<Boolean> responseEntity = restTemplate.exchange(
+                    EMAIL_SERVICE_URL,
+                    HttpMethod.POST,
+                    entity,
+                    Boolean.class
+            );
+            if (!ObjectUtils.isEmpty(responseEntity.getBody()) && responseEntity.getBody())
+            {
+                model.addAttribute(MODEL_ATTRIBUTE_SUCCESS,
+                        MODEL_ATTRIBUTE_SUCCESS_MESSAGE + userModel.getEmail());
+            }
+            else
+            {
+                model.addAttribute(MODEL_ATTRIBUTE_ERROR, MODEL_ATTRIBUTE_ERROR_MESSAGE);
+            }
         }
         return VIEW_REGISTRATION;
     }

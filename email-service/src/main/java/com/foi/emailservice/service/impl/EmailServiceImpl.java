@@ -4,6 +4,8 @@ import com.foi.emailservice.entity.UserEntity;
 import com.foi.emailservice.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -22,6 +24,7 @@ public class EmailServiceImpl implements EmailService
     private static final String EQUALS = "=";
     private static final String URL_RESET_PASSWORD = "/reset-password";
     private static final String URL_VERIFY_ACCOUNT = "/verify-account";
+    private static final String USER_SERVICE = "user-service";
 
     @Value("${spring.mail.properties.from}")
     private String fromEmail;
@@ -41,20 +44,20 @@ public class EmailServiceImpl implements EmailService
     @Autowired
     private JavaMailSender javaMailSender;
 
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
     @Async
     @Override
-    public boolean sendForgottenPasswordEmail(
-            final UserEntity userEntity, final HttpServletRequest request)
+    public boolean sendForgottenPasswordEmail(final UserEntity userEntity)
     {
-        //        userService.createToken(userEntity); //prebaciti u user service
-        final String appUrl = request.getScheme() + COLON + SLASH + SLASH + request.getServerName() + COLON + request
-                .getServerPort() + request.getContextPath();
+        ServiceInstance userServiceInstance = discoveryClient.getInstances(USER_SERVICE).get(0);
         final SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
         passwordResetEmail.setFrom(fromEmail);
         passwordResetEmail.setTo(userEntity.getEmail());
         passwordResetEmail.setSubject(emailPasswordResetSubject);
-        passwordResetEmail.setText(emailTextPasswordReset + appUrl + URL_RESET_PASSWORD + QUESTION_MARK + TOKEN + EQUALS + userEntity
-                .getToken());
+        passwordResetEmail.setText(emailTextPasswordReset + userServiceInstance.getUri() + URL_RESET_PASSWORD
+                + QUESTION_MARK + TOKEN + EQUALS + userEntity.getToken());
         try
         {
             javaMailSender.send(passwordResetEmail);
@@ -64,21 +67,18 @@ public class EmailServiceImpl implements EmailService
         {
             return false;
         }
-
     }
 
     @Override
-    public boolean sendActivationEmail(final UserEntity userEntity, final HttpServletRequest request)
+    public boolean sendActivationEmail(final UserEntity userEntity)
     {
-        //        userService.createToken(userEntity); //prebaciti u user service
-        final String appUrl = request.getScheme() + COLON + SLASH + SLASH + request.getServerName() + COLON + request
-                .getServerPort() + request.getContextPath();
+        ServiceInstance userServiceInstance = discoveryClient.getInstances(USER_SERVICE).get(0);
         final SimpleMailMessage activationEmail = new SimpleMailMessage();
         activationEmail.setFrom(fromEmail);
         activationEmail.setTo(userEntity.getEmail());
         activationEmail.setSubject(emailActivationSubject);
-        activationEmail.setText(emailActivationText + appUrl + URL_VERIFY_ACCOUNT + QUESTION_MARK + TOKEN + EQUALS + userEntity
-                .getToken());
+        activationEmail.setText(emailActivationText + userServiceInstance.getUri() + URL_VERIFY_ACCOUNT + QUESTION_MARK + TOKEN + EQUALS
+                + userEntity.getToken());
         try
         {
             javaMailSender.send(activationEmail);

@@ -1,7 +1,9 @@
 package com.foi.userservice.service.impl;
 
 import com.foi.userservice.entity.RoleEntity;
+import com.foi.userservice.entity.TransactionEntity;
 import com.foi.userservice.entity.UserEntity;
+import com.foi.userservice.model.TransactionListModel;
 import com.foi.userservice.model.UserModel;
 import com.foi.userservice.repository.RoleRepository;
 import com.foi.userservice.repository.UserRepository;
@@ -15,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -26,6 +29,7 @@ public class UserServiceImpl
     private static final String USERNAME_NOT_FOUND_EXCEPTION_MESSAGE = "Invalid username or password.";
 
     private static final String ROLE_USER = "ROLE_USER";
+    private static final String INCOME = "income";
 
     @Autowired
     private UserRepository userRepository;
@@ -128,6 +132,28 @@ public class UserServiceImpl
             userEntity.setBalance((float) userModel.getBalance());
         }
         userRepository.save(userEntity);
+    }
+
+    @Override
+    public boolean updateBalance(TransactionListModel transactionListModel)
+    {
+        for (TransactionEntity transactionEntity : transactionListModel.getTransactionEntityList())
+        {
+            double currentBalance = transactionEntity.getUserEntity().getBalance();
+            if (transactionEntity.getType().equals(INCOME))
+            {
+                transactionEntity.getUserEntity().setBalance((float) (currentBalance + transactionEntity.getAmount()));
+            }
+            else
+            {
+                transactionEntity.getUserEntity().setBalance((float) (currentBalance - transactionEntity.getAmount()));
+            }
+            if (ObjectUtils.isEmpty(userRepository.save(transactionEntity.getUserEntity())))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

@@ -60,6 +60,7 @@ public class PasswordController
 
         if (optionalUserEntity.isPresent())
         {
+            userFacade.createToken(optionalUserEntity.get());
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity entity = new HttpEntity(optionalUserEntity.get(), headers);
@@ -70,19 +71,12 @@ public class PasswordController
                     Boolean.class
             );
 
-            if (!ObjectUtils.isEmpty(result.getBody()))
+            if (!ObjectUtils.isEmpty(result.getBody()) && result.getBody())
             {
-                if (result.getBody())
-                {
-                    model.addAttribute(
-                            MODEL_ATTRIBUTE_SUCCESS,
-                            MODEL_ATTRIBUTE_SUCCESS_MESSAGE + email
-                    );
-                }
-                else
-                {
-                    model.addAttribute(MODEL_ATTRIBUTE_ERROR, MODEL_ATTRIBUTE_ERROR_MESSAGE);
-                }
+                model.addAttribute(
+                        MODEL_ATTRIBUTE_SUCCESS,
+                        MODEL_ATTRIBUTE_SUCCESS_MESSAGE + email
+                );
             }
             else
             {
