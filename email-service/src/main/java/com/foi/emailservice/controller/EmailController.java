@@ -21,16 +21,16 @@ public class EmailController
     @RequestMapping(value = "/send-forgotten-password-email")
     public Boolean sendForgottenPasswordEmail(
             @RequestBody
-                    UserEntity userEntity, HttpServletRequest request)
+                    UserEntity userEntity)
     {
-        return emailFacade.sendForgottenPasswordEmail(userEntity, request);
+        return emailFacade.sendForgottenPasswordEmail(userEntity);
     }
 
     @RequestMapping(value = "/send-activation-email")
     public Boolean sendActivationEmail(
             @RequestBody
-                    UserEntity userEntity, HttpServletRequest request)
+                    UserEntity userEntity)
     {
-        return emailFacade.sendActivationEmail(userEntity, request);
+        return emailFacade.sendActivationEmail(userEntity);
     }
 }

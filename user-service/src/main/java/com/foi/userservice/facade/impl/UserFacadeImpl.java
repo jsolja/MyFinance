@@ -2,6 +2,7 @@ package com.foi.userservice.facade.impl;
 
 import com.foi.userservice.entity.UserEntity;
 import com.foi.userservice.facade.UserFacade;
+import com.foi.userservice.model.TransactionListModel;
 import com.foi.userservice.model.UserModel;
 import com.foi.userservice.populator.UserPopulator;
 import com.foi.userservice.service.UserService;
@@ -78,5 +79,11 @@ public class UserFacadeImpl implements UserFacade
     {
         final UserEntity userEntity = getUserEntity();
         return userPopulator.populate(userEntity);
+    }
+
+    @Override
+    public boolean updateBalance(TransactionListModel transactionListModel)
+    {
+        return userService.updateBalance(transactionListModel);
     }
 }

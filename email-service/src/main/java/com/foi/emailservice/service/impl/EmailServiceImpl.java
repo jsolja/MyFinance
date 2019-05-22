@@ -49,8 +49,7 @@ public class EmailServiceImpl implements EmailService
 
     @Async
     @Override
-    public boolean sendForgottenPasswordEmail(
-            final UserEntity userEntity, final HttpServletRequest request)
+    public boolean sendForgottenPasswordEmail(final UserEntity userEntity)
     {
         ServiceInstance userServiceInstance = discoveryClient.getInstances(USER_SERVICE).get(0);
         final SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
@@ -71,7 +70,7 @@ public class EmailServiceImpl implements EmailService
     }
 
     @Override
-    public boolean sendActivationEmail(final UserEntity userEntity, final HttpServletRequest request)
+    public boolean sendActivationEmail(final UserEntity userEntity)
     {
         ServiceInstance userServiceInstance = discoveryClient.getInstances(USER_SERVICE).get(0);
         final SimpleMailMessage activationEmail = new SimpleMailMessage();

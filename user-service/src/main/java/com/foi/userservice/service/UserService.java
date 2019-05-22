@@ -1,6 +1,7 @@
 package com.foi.userservice.service;
 
 import com.foi.userservice.entity.UserEntity;
+import com.foi.userservice.model.TransactionListModel;
 import com.foi.userservice.model.UserModel;
 
 import java.util.Optional;
@@ -24,4 +25,6 @@ public interface UserService
     UserEntity getUserEntity();
 
     void updateUser(UserModel userModel);
+
+    boolean updateBalance(TransactionListModel transactionListModel);
 }

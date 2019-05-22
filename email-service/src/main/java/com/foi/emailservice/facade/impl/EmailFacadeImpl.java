@@ -15,15 +15,14 @@ public class EmailFacadeImpl implements EmailFacade
     private EmailService emailService;
 
     @Override
-    public boolean sendForgottenPasswordEmail(
-            final UserEntity userEntity, final HttpServletRequest request)
+    public boolean sendForgottenPasswordEmail(final UserEntity userEntity)
     {
-        return emailService.sendForgottenPasswordEmail(userEntity, request);
+        return emailService.sendForgottenPasswordEmail(userEntity);
     }
 
     @Override
-    public boolean sendActivationEmail(final UserEntity userEntity, final HttpServletRequest request)
+    public boolean sendActivationEmail(final UserEntity userEntity)
     {
-        return emailService.sendActivationEmail(userEntity, request);
+        return emailService.sendActivationEmail(userEntity);
     }
 }
