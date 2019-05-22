@@ -139,16 +139,20 @@ public class UserServiceImpl
     {
         for (TransactionEntity transactionEntity : transactionListModel.getTransactionEntityList())
         {
-            double currentBalance = transactionEntity.getUserEntity().getBalance();
+            Optional<UserEntity> userEntity = userRepository.findByUsername(transactionEntity
+                    .getUserEntity()
+                    .getUsername());
+            double currentBalance = userEntity.get().getBalance();
             if (transactionEntity.getType().equals(INCOME))
             {
-                transactionEntity.getUserEntity().setBalance((float) (currentBalance + transactionEntity.getAmount()));
+                userEntity.get().setBalance((float) (currentBalance + transactionEntity.getAmount()));
             }
             else
             {
-                transactionEntity.getUserEntity().setBalance((float) (currentBalance - transactionEntity.getAmount()));
+                userEntity.get().setBalance((float) (currentBalance - transactionEntity.getAmount()));
             }
-            if (ObjectUtils.isEmpty(userRepository.save(transactionEntity.getUserEntity())))
+
+            if (ObjectUtils.isEmpty(userRepository.save(userEntity.get())))
             {
                 return false;
             }

@@ -8,6 +8,7 @@ import com.foi.transactionservice.repository.TransactionRepository;
 import com.foi.transactionservice.repository.UserRepository;
 import com.foi.transactionservice.service.TransactionService;
 import com.opencsv.CSVReader;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.*;
@@ -81,24 +82,23 @@ public class TransactionServiceImpl implements TransactionService
         {
             Logger.getLogger(TransactionServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return updateBalance(transactionEntityList);
+        return updateBalanceList(transactionEntityList);
     }
 
     @Override
     public TransactionEntity makeTransaction(final TransactionModel transactionModel)
     {
         final TransactionEntity newTransaction = new TransactionEntity();
-        //        newTransaction.setAmount(transactionModel.getAmount());
-        //        newTransaction.setDate(transactionModel.getDate());
-        //        newTransaction.setDetails(transactionModel.getDetails());
-        //        newTransaction.setFromUser(transactionModel.getFromUser());
-        //        newTransaction.setToUser(transactionModel.getToUser());
-        //        newTransaction.setType(transactionModel.getType());
-        //        final Optional<UserEntity> userEntity = userRepository.findByUsername(userService
-        //                .getUserEntity()
-        //                .getUsername());
-        //        userEntity.ifPresent(newTransaction::setUserEntity);
-        //        updateBalance(newTransaction);
+        newTransaction.setAmount(transactionModel.getAmount());
+        newTransaction.setDate(transactionModel.getDate());
+        newTransaction.setDetails(transactionModel.getDetails());
+        newTransaction.setFromUser(transactionModel.getFromUser());
+        newTransaction.setToUser(transactionModel.getToUser());
+        newTransaction.setType(transactionModel.getType());
+        newTransaction.setUserEntity(userRepository
+                .findByUsername(transactionModel.getUserEntity().getUsername())
+                .get());
+        updateBalance(newTransaction);
         return transactionRepository.save(newTransaction);
     }
 
@@ -131,7 +131,7 @@ public class TransactionServiceImpl implements TransactionService
         );
     }
 
-    private boolean updateBalance(List<TransactionEntity> transactionEntityList)
+    private boolean updateBalanceList(List<TransactionEntity> transactionEntityList)
     {
         TransactionListModel transactionListModel = new TransactionListModel();
         transactionListModel.setTransactionEntityList(transactionEntityList);
@@ -145,5 +145,19 @@ public class TransactionServiceImpl implements TransactionService
                 Boolean.class
         );
         return result.getBody();
+    }
+
+    private void updateBalance(TransactionEntity transactionEntity)
+    {
+        UserEntity userEntity = transactionEntity.getUserEntity();
+        if (StringUtils.equals(transactionEntity.getType(), INCOME))
+        {
+            userEntity.setBalance((float) (userEntity.getBalance() + transactionEntity.getAmount()));
+        }
+        if (StringUtils.equals(transactionEntity.getType(), EXPENSE))
+        {
+            userEntity.setBalance((float) (userEntity.getBalance() - transactionEntity.getAmount()));
+        }
+        userRepository.save(userEntity);
     }
 }

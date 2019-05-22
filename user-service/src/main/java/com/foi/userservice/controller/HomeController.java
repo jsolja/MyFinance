@@ -34,6 +34,7 @@ public class HomeController
     public String home(final Model model)
     {
         ResponseEntity<TransactionListModel> result = findTransactionsByUser();
+        //userFacade.updateBalance(result.getBody());
         model.addAttribute(MODEL_ATTRIBUTE_TRANSACTIONS, result.getBody().getTransactionEntityList());
         return VIEW_HOME;
     }
