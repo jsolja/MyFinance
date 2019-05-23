@@ -79,8 +79,10 @@ public class RegistrationController
             );
             if (!ObjectUtils.isEmpty(responseEntity.getBody()) && responseEntity.getBody())
             {
-                model.addAttribute(MODEL_ATTRIBUTE_SUCCESS,
-                        MODEL_ATTRIBUTE_SUCCESS_MESSAGE + userModel.getEmail());
+                model.addAttribute(
+                        MODEL_ATTRIBUTE_SUCCESS,
+                        MODEL_ATTRIBUTE_SUCCESS_MESSAGE + userModel.getEmail()
+                );
             }
             else
             {

@@ -7,11 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
-/**
- * @author Jura Solja <jura.solja@ecx.io> ON 2019-05-20
- */
 @RestController
 public class EmailController
 {

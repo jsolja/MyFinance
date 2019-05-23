@@ -13,17 +13,13 @@ public class TransactionFieldsValidator implements Validator
 {
     private static final String INCOME = "income";
     private static final String EXPENSE = "expense";
-
     private static final String TO_USER_FIELD = "toUser";
     private static final String TO_USER_CODE = "validation.to.user.error";
-
     private static final String FROM_USER_FIELD = "fromUser";
     private static final String FROM_USER_CODE = "validation.from.user.error";
-
     private static final String AMOUNT_FIELD = "amount";
     private static final String AMOUNT_BELOW_ZERO_CODE = "validation.amount.below.zero.error";
     private static final String AMOUNT_INSUFFICIENT_FUNDS_CODE = "validation.amount.insufficient.funds.error";
-
     private static final String TYPE_FIELD = "type";
     private static final String TYPE_CODE = "validation.type.error";
 
@@ -48,7 +44,6 @@ public class TransactionFieldsValidator implements Validator
                 errors.rejectValue(TO_USER_FIELD, TO_USER_CODE);
             }
         }
-
         if (StringUtils.equals(transactionModel.getType(), EXPENSE))
         {
             if (!StringUtils.equals(userFacade.getUserModel().getUsername(), transactionModel.getFromUser()))
@@ -63,12 +58,10 @@ public class TransactionFieldsValidator implements Validator
                 );
             }
         }
-
         if (transactionModel.getAmount() <= 0)
         {
             errors.rejectValue(AMOUNT_FIELD, AMOUNT_BELOW_ZERO_CODE);
         }
-
         if (!StringUtils.equals(transactionModel.getType(), INCOME) && !StringUtils.equals(
                 transactionModel.getType(), EXPENSE))
         {

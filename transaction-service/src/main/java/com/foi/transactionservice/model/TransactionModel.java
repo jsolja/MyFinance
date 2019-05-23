@@ -1,5 +1,7 @@
 package com.foi.transactionservice.model;
 
+import com.foi.transactionservice.entity.UserEntity;
+
 import java.sql.Date;
 
 public class TransactionModel
@@ -16,7 +18,7 @@ public class TransactionModel
 
     private Date date;
 
-    private UserModel userModel;
+    private UserEntity userEntity;
 
     public float getAmount()
     {
@@ -78,13 +80,13 @@ public class TransactionModel
         this.date = date;
     }
 
-    public UserModel getUserModel()
+    public UserEntity getUserEntity()
     {
-        return userModel;
+        return userEntity;
     }
 
-    public void setUserModel(final UserModel userModel)
+    public void setUserEntity(UserEntity userEntity)
     {
-        this.userModel = userModel;
+        this.userEntity = userEntity;
     }
 }

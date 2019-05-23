@@ -1,6 +1,5 @@
 package com.foi.transactionservice.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -52,7 +51,6 @@ public class UserEntity
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(name = "role_id")
-    @JsonIgnore
     private RoleEntity role;
 
     public UserEntity()

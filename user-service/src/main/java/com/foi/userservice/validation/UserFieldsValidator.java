@@ -14,10 +14,8 @@ public class UserFieldsValidator implements Validator
 {
     private static final String MATCHING_PASSWORD_FIELD = "matchingPassword";
     private static final String MATCHING_PASSWORD_CODE = "validation.matching.password.error";
-
     private static final String EXISTING_EMAIL_FIELD = "email";
     private static final String EXISTING_EMAIL_CODE = "validation.existing.email.error";
-
     private static final String EXISTING_USERNAME_FIELD = "username";
     private static final String EXISTING_USERNAME_CODE = "validation.existing.username.error";
 
@@ -30,7 +28,6 @@ public class UserFieldsValidator implements Validator
         return UserModel.class.equals(aClass);
     }
 
-    //
     @Override
     public void validate(final Object o, final Errors errors)
     {

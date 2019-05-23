@@ -12,13 +12,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Service
 public class EmailServiceImpl implements EmailService
 {
-    private static final String COLON = ":";
-    private static final String SLASH = "/";
     private static final String QUESTION_MARK = "?";
     private static final String TOKEN = "token";
     private static final String EQUALS = "=";
@@ -56,8 +52,8 @@ public class EmailServiceImpl implements EmailService
         passwordResetEmail.setFrom(fromEmail);
         passwordResetEmail.setTo(userEntity.getEmail());
         passwordResetEmail.setSubject(emailPasswordResetSubject);
-        passwordResetEmail.setText(emailTextPasswordReset + userServiceInstance.getUri() + URL_RESET_PASSWORD
-                + QUESTION_MARK + TOKEN + EQUALS + userEntity.getToken());
+        passwordResetEmail.setText(emailTextPasswordReset + userServiceInstance.getUri()
+                + URL_RESET_PASSWORD + QUESTION_MARK + TOKEN + EQUALS + userEntity.getToken());
         try
         {
             javaMailSender.send(passwordResetEmail);
@@ -77,8 +73,8 @@ public class EmailServiceImpl implements EmailService
         activationEmail.setFrom(fromEmail);
         activationEmail.setTo(userEntity.getEmail());
         activationEmail.setSubject(emailActivationSubject);
-        activationEmail.setText(emailActivationText + userServiceInstance.getUri() + URL_VERIFY_ACCOUNT + QUESTION_MARK + TOKEN + EQUALS
-                + userEntity.getToken());
+        activationEmail.setText(emailActivationText + userServiceInstance.getUri()
+                + URL_VERIFY_ACCOUNT + QUESTION_MARK + TOKEN + EQUALS + userEntity.getToken());
         try
         {
             javaMailSender.send(activationEmail);

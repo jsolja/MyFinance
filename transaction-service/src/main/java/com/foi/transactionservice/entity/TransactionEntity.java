@@ -1,6 +1,5 @@
 package com.foi.transactionservice.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -39,7 +38,6 @@ public class TransactionEntity
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
     private UserEntity user;
 
     public TransactionEntity()

@@ -72,6 +72,7 @@ public class UserModel
 
     public double getBalance()
     {
+        
         return balance;
     }
 
