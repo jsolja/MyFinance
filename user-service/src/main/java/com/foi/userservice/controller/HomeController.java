@@ -34,7 +34,6 @@ public class HomeController
     public String home(final Model model)
     {
         ResponseEntity<TransactionListModel> result = findTransactionsByUser();
-        //userFacade.updateBalance(result.getBody());
         model.addAttribute(MODEL_ATTRIBUTE_TRANSACTIONS, result.getBody().getTransactionEntityList());
         return VIEW_HOME;
     }
@@ -54,7 +53,6 @@ public class HomeController
                 entity,
                 Boolean.class
         );
-
         model.addAttribute(MODEL_ATTRIBUTE_ERROR, resultImport.getBody());
         ResponseEntity<TransactionListModel> result = findTransactionsByUser();
         model.addAttribute(MODEL_ATTRIBUTE_TRANSACTIONS, result.getBody().getTransactionEntityList());

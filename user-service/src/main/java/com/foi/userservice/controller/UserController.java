@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author Jura Solja <jura.solja@ecx.io> ON 2019-05-21
- */
 @RestController
 public class UserController
 {

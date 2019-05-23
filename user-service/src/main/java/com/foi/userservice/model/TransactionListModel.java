@@ -4,9 +4,6 @@ import com.foi.userservice.entity.TransactionEntity;
 
 import java.util.List;
 
-/**
- * @author Jura Solja <jura.solja@ecx.io> ON 2019-05-21
- */
 public class TransactionListModel
 {
     List<TransactionEntity> transactionEntityList;

@@ -33,7 +33,6 @@ public class PasswordController
     private static final String PARAMETER_TOKEN = "token";
     private static final String PARAMETER_PASSWORD = "password";
     private static final String PARAMETER_EMAIL = "email";
-
     private static final String EMAIL_SERVICE_URL = "http://email-service/send-forgotten-password-email";
 
     @Autowired
@@ -70,7 +69,6 @@ public class PasswordController
                     entity,
                     Boolean.class
             );
-
             if (!ObjectUtils.isEmpty(result.getBody()) && result.getBody())
             {
                 model.addAttribute(
