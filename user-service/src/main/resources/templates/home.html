@@ -67,10 +67,10 @@
                 <span class="file-info">Upload a file</span>
             </div>
             <input class="form-control form-control-sm page-custom resize" type="submit" name="submit" id="submit" value="Open" style="display: none"/>
-            <div class="fail-message" th:if="${error}">
+            <div class="fail-message" th:if="${error eq false}">
                 An error occurred while importing transactions! Did you double check CSV data?
             </div>
-            <div class="success-message" th:if="${error eq false}">
+            <div class="success-message" th:if="${error}">
                 Transactions are successfully imported.
             </div>
         </form>

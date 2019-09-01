@@ -71,7 +71,7 @@ public class TransactionServiceImpl implements TransactionService
                 newTransaction.setDate(java.sql.Date.valueOf(data[5]));
                 final Optional<UserEntity> optionalUserEntity = userRepository.findByUsername(data[6]);
                 optionalUserEntity.ifPresent(newTransaction::setUserEntity);
-                if (!ObjectUtils.isEmpty(transactionRepository.save(newTransaction)))
+                if (ObjectUtils.isEmpty(transactionRepository.save(newTransaction)))
                 {
                     return false;
                 }
@@ -81,6 +81,7 @@ public class TransactionServiceImpl implements TransactionService
         catch (final Exception ex)
         {
             Logger.getLogger(TransactionServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
         return updateBalanceList(transactionEntityList);
     }

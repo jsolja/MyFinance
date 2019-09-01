@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class EmailController
 {
+    private static final String MAPPING_SEND_FORGOTTEN_PASSWORD_EMAIL = "/send-forgotten-password-email";
+
     @Autowired
     private EmailFacade emailFacade;
 
-    @RequestMapping(value = "/send-forgotten-password-email")
+    @RequestMapping(value = MAPPING_SEND_FORGOTTEN_PASSWORD_EMAIL)
     public Boolean sendForgottenPasswordEmail(
             @RequestBody
                     UserEntity userEntity)
